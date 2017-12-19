@@ -1,0 +1,8 @@
+{
+  "name": "placitas-everywhere",
+  "app_id": "34b4ae28",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
