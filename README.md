@@ -17,7 +17,7 @@ Follow these instructions to install the app and run it with the mock (in-memory
     git clone https://github.com/ericsantii/PlacitasEverywhere
     ```
 
-1. Navigate to the `dreamhouse-mobile-ionic` directory :
+1. Navigate to the `PlacitasEverywhere` directory :
     ```
     cd PlacitasEverywhere
     ```
