@@ -1,0 +1,29 @@
+<!--
+  Generated template for the SearchPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Search</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+
+  <ion-content padding="true" class="has-header">
+      <ion-searchbar
+      [(ngModel)]="myInput"
+      [showCancelButton]="shouldShowCancel"
+      (ionInput)="onInput($event)"
+      (ionCancel)="onCancel($event)">
+    </ion-searchbar>
+    <button ion-item *ngFor="let item of items">
+        <ion-img style="width: 80px; height: 80px;" src={{item.uri}}></ion-img>
+        {{item.name}}
+        {{item.price}}
+    </button>
+    </ion-content>

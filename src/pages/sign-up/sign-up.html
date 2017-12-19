@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Sign Up</ion-title>
+  </ion-navbar>
+</ion-header>
+
+  
+  <ion-content padding="true" class="has-header">
+    <h1 style="color:#000000;text-align:center;">Sign Up</h1>
+    <form (ngSubmit)="signUp()">
+        <ion-item>
+          <ion-label>UserID</ion-label>
+          <ion-input [(ngModel)]="userID" name="userID" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Password</ion-label>
+            <ion-input [(ngModel)]="password" name="password" type="password"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>First Name</ion-label>
+            <ion-input [(ngModel)]="firstName" name="firstName" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Last Name</ion-label>
+            <ion-input [(ngModel)]="lastName" name="password" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Email</ion-label>
+            <ion-input [(ngModel)]="email" name="email" type="email"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Phone Number</ion-label>
+            <ion-input [(ngModel)]="phoneNumber" name="phoneNumber" type="text"></ion-input>
+        </ion-item>
+        <button ion-button type="submit" block>Sign Up</button>
+      </form>
+      
+    
+  </ion-content>

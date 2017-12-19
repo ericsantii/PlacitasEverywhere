@@ -1,0 +1,29 @@
+  <ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Sign In</ion-title>
+  </ion-navbar>
+</ion-header>
+
+  
+  <ion-content padding="true" class="has-header">
+    <h1 style="color:#000000;text-align:center;">Sign In</h1>
+    <form (ngSubmit)="signIn()">
+      <ion-item>
+        <ion-label> UserID</ion-label>
+        <ion-input [(ngModel)]="userID" name="userID" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-label> Password</ion-label>
+          <ion-input [(ngModel)]="password" name="password" type="password"></ion-input>
+      </ion-item>
+      <button ion-button type="submit" block>Sign In</button>
+    </form>
+    
+    <div>
+      <button ion-button (click)="goToSignUpPage()" block>Sign Up</button>
+    </div>
+  </ion-content>
