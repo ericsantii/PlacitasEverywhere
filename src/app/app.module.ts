@@ -20,6 +20,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SellerPage } from '../pages/seller/seller';
 import { SellerService } from '../providers/sellers-service-mock';
+import { HarvestPage } from '../pages/harvest/harvest';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { SellerService } from '../providers/sellers-service-mock';
     SellerPage,
     CartPage,
     UserPage,
-    SellingPointPage
+    SellingPointPage,
+    HarvestPage
   ],
   imports: [
     BrowserModule,
@@ -53,7 +55,8 @@ import { SellerService } from '../providers/sellers-service-mock';
     SellerPage,
     CartPage,
     UserPage,
-    SellingPointPage
+    SellingPointPage,
+    HarvestPage
   ],
   providers: [
     StatusBar,

@@ -32,4 +32,11 @@
         </ion-item>
       <button ion-button type="submit" block>Add to Cart</button>
     </form>
+    <button (click) = "getHarvestInfo({harvest : harvestinf})">
+      Harvest Land: {{product.harvestLandID}}</button>
+    <p>Seller: {{product.sellerID}}</p>
+    <ion-item>
+        <ion-label color="primary">Qty:</ion-label>
+        <ion-input placeholder=""></ion-input>
+      </ion-item>
 </ion-content>
