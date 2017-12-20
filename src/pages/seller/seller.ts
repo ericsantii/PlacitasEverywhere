@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { SellerService } from '../../providers/sellers-service-mock';
 
 /**
  * Generated class for the SellerPage page.
@@ -22,7 +21,7 @@ export class SellerPage {
     // sellers: Array<{name: string, id: number, email: string,pnumber:string}>;
     seller: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public service: SellerService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
   //   this.names = ['Eric','Fernando','Jose','Alejandro','Mauricio','Edgardo','Pedro','Teresa','Juana','Juanka'];
   //   this.id=[0,1,2,3,4,5,6,7,8,9];
   //   this.email=['asdi@gmail.com','josefeliciano@gmail.com','hope@hotmail.com','inso@hotmail.com','picabatata@gmail.com','elnegritoojosclaro@gmail.com','noriel@gmail.com','100pre@hotmail.com','picheo@gmail.com','mcdonal@hotmail.com'];
@@ -34,10 +33,7 @@ export class SellerPage {
   //     email:this.email[i],
   //     pnumber:this.pnumber[i]
   //   });
-    this.seller = this.navParams.data;
-    service.findById(this.seller.id).then(
-      seller => this.seller = seller
-    );
+    
     
 
 
