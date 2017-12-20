@@ -25,11 +25,8 @@ import { SellerService } from '../providers/sellers-service-mock';
     SignUpPage,
     PostNewProductPage,
     SearchPage,
-<<<<<<< HEAD
-    ProductPage
-=======
+    ProductPage,
     SellerPage
->>>>>>> 819c6f743d7908aef335c2a8c2cee2d1031e95fd
   ],
   imports: [
     BrowserModule,
@@ -44,11 +41,8 @@ import { SellerService } from '../providers/sellers-service-mock';
     SignUpPage,
     PostNewProductPage,
     SearchPage,
-<<<<<<< HEAD
-    ProductPage
-=======
+    ProductPage,
     SellerPage
->>>>>>> 819c6f743d7908aef335c2a8c2cee2d1031e95fd
   ],
   providers: [
     StatusBar,
