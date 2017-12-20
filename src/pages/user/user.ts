@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { HarvestPage } from '../harvest/harvest';
 
 /**
  * Generated class for the UserPage page.
@@ -48,6 +49,10 @@ export class UserPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserPage');
+  }
+
+  getHarvestInfo(harvestLand){
+    this.navCtrl.push(HarvestPage, {harvestLand : harvestLand});
   }
 
 }

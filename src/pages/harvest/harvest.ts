@@ -17,7 +17,7 @@ export class HarvestPage {
     harvid;
     harvest;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.harvest = this.navParams.get('item');
+    this.harvest = this.navParams.get('harvestLand');
   }
 
   ionViewDidLoad() {
