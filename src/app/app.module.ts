@@ -13,6 +13,8 @@ import { ProductPage } from '../pages/product/product';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { SellerPage } from '../pages/seller/seller';
+import { SellerService } from '../providers/sellers-service-mock';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SignUpPage,
     PostNewProductPage,
     SearchPage,
+<<<<<<< HEAD
     ProductPage
+=======
+    SellerPage
+>>>>>>> 819c6f743d7908aef335c2a8c2cee2d1031e95fd
   ],
   imports: [
     BrowserModule,
@@ -38,11 +44,16 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SignUpPage,
     PostNewProductPage,
     SearchPage,
+<<<<<<< HEAD
     ProductPage
+=======
+    SellerPage
+>>>>>>> 819c6f743d7908aef335c2a8c2cee2d1031e95fd
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    SellerService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

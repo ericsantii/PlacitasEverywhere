@@ -356,6 +356,10 @@ module.exports = webpackAsyncContext;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ListPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__seller_seller__ = __webpack_require__(282);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__seller_seller___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__seller_seller__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_sellers_service_mock__ = __webpack_require__(283);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_sellers_service_mock___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__providers_sellers_service_mock__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -367,40 +371,45 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
+
 var ListPage = (function () {
-    function ListPage(navCtrl, navParams) {
+    function ListPage(navCtrl, navParams, service) {
+        var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        // If we navigated to this page, we will have an item available as a nav param
-        this.selectedItem = navParams.get('item');
-        // Let's populate this page with some filler content for funzies
-        this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
-            'american-football', 'boat', 'bluetooth', 'build'];
-        this.produce = ['Mango', 'Coco', 'Aguacate', 'Limon', 'Toronja', 'Acerola', 'Quenepas', 'Yuca', 'Yautia', 'Calabaza'];
-        this.items = [];
-        for (var i = 0; i < 10; i++) {
-            this.items.push({
-                title: this.produce[i],
-                note: 'Description',
-                icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-            });
-        }
+        this.service = service;
+        service.findAll().then(function (data) { return _this.sellers = data; });
+        // // If we navigated to this page, we will have an item available as a nav param
+        // this.selectedItem = navParams.get('item');
+        // // Let's populate this page with some filler content for funzies
+        // this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
+        // 'american-football', 'boat', 'bluetooth', 'build'];
+        // this.produce = ['Mango','Coco','Aguacate','Limon','Toronja','Acerola','Quenepas','Yuca','Yautia','Calabaza'];
+        // this.items = [];
+        // for (let i = 0; i < 10; i++) {
+        //   this.items.push({
+        //     title: this.produce[i],
+        //     note: 'Description',
+        //     icon: this.icons[Math.floor(Math.random() * this.icons.length)]
+        //   });
+        // }
     }
-    ListPage_1 = ListPage;
-    ListPage.prototype.itemTapped = function (event, item) {
+    ListPage.prototype.itemTapped = function (item) {
         // That's right, we're pushing to ourselves!
-        this.navCtrl.push(ListPage_1, {
-            item: item
-        });
+        // this.navCtrl.push(ListPage, {
+        //   item: item
+        // });
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__seller_seller__["SellerPage"], item);
     };
-    ListPage = ListPage_1 = __decorate([
+    ListPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-list',template:/*ion-inline-start:"D:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\list\list.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Product Board</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-list>\n\n    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">\n\n      <ion-icon [name]="item.icon" item-start></ion-icon>\n\n      {{item.title}}\n\n      <div class="item-note" item-end>\n\n        {{item.note}}\n\n      </div>\n\n    </button>\n\n  </ion-list>\n\n  <div *ngIf="selectedItem" padding>\n\n    You navigated here from <b>{{selectedItem.title}}</b>\n\n  </div>\n\n</ion-content>\n\n'/*ion-inline-end:"D:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\list\list.html"*/
+            selector: 'page-list',template:/*ion-inline-start:"D:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\list\list.html"*/'\n\n<ion-header>\n\n  <ion-navbar>\n\n      <button ion-button menuToggle>\n\n          <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title>Product Board</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n\n\n  <ion-list>\n\n\n\n      <button ion-item *ngFor="let seller of sellers" (click)="itemTapped(seller)">\n\n          <h2>{{seller.name}}</h2>\n\n          <h3>{{seller.phone}}</h3>\n\n      </button>\n\n\n\n  </ion-list>\n\n\n\n</ion-content>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n<!-- <ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Product Board</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-list>\n\n    <button ion-item *ngFor="let item of items" (click)="itemTapped(item)">\n\n      <ion-icon [name]="item.icon" item-start></ion-icon>\n\n      {{item.title}}\n\n      <div class="item-note" item-end>\n\n        {{item.note}}\n\n      </div>\n\n    </button>\n\n  </ion-list>\n\n  <div *ngIf="selectedItem" padding>\n\n    You navigated here from <b>{{selectedItem.title}}</b>\n\n  </div>\n\n</ion-content> -->\n\n'/*ion-inline-end:"D:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\list\list.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__providers_sellers_service_mock__["SellerService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_sellers_service_mock__["SellerService"]) === "function" && _c || Object])
     ], ListPage);
     return ListPage;
-    var ListPage_1;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=list.js.map
@@ -585,6 +594,20 @@ var MyApp = (function () {
 }());
 
 //# sourceMappingURL=app.component.js.map
+
+/***/ }),
+
+/***/ 282:
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\Fernando Documents\\Documents\\GitHub\\PlacitasEverywhere-Client\\src\\pages\\seller\\seller.js'");
+
+/***/ }),
+
+/***/ 283:
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open 'D:\\Fernando Documents\\Documents\\GitHub\\PlacitasEverywhere-Client\\src\\providers\\sellers-service-mock.js'");
 
 /***/ }),
 
