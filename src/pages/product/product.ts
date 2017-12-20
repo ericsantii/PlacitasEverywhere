@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-<<<<<<< HEAD
 import {UserPage} from '../user/user'
-=======
 import { HarvestPage } from '../harvest/harvest';
->>>>>>> c4c1465668df63ac259504325a3edf934e47f47e
 
 /**
  * Generated class for the ProductPage page.
@@ -90,8 +87,5 @@ export class ProductPage {
   );
 
   }
-  gotToHarvestLand(harvestLandID){
 
-
-  }
 }

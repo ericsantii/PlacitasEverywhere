@@ -1,25 +1,14 @@
 webpackJsonp([4],{
 
-<<<<<<< HEAD
-/***/ 284:
-=======
-/***/ 281:
->>>>>>> c4c1465668df63ac259504325a3edf934e47f47e
+/***/ 289:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-<<<<<<< HEAD
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SearchPageModule", function() { return SearchPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SellerPageModule", function() { return SellerPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__search__ = __webpack_require__(104);
-=======
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductPageModule", function() { return ProductPageModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__product__ = __webpack_require__(102);
->>>>>>> c4c1465668df63ac259504325a3edf934e47f47e
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__seller__ = __webpack_require__(107);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -29,32 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-<<<<<<< HEAD
-var SearchPageModule = (function () {
-    function SearchPageModule() {
-=======
-var ProductPageModule = (function () {
-    function ProductPageModule() {
->>>>>>> c4c1465668df63ac259504325a3edf934e47f47e
+var SellerPageModule = (function () {
+    function SellerPageModule() {
     }
-    SearchPageModule = __decorate([
+    SellerPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__search__["a" /* SearchPage */],
+                __WEBPACK_IMPORTED_MODULE_2__seller__["a" /* SellerPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__search__["a" /* SearchPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__seller__["a" /* SellerPage */]),
             ],
         })
-    ], SearchPageModule);
-    return SearchPageModule;
+    ], SellerPageModule);
+    return SellerPageModule;
 }());
 
-<<<<<<< HEAD
-//# sourceMappingURL=search.module.js.map
-=======
-//# sourceMappingURL=product.module.js.map
->>>>>>> c4c1465668df63ac259504325a3edf934e47f47e
+//# sourceMappingURL=seller.module.js.map
 
 /***/ })
 
