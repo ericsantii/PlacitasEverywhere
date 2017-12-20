@@ -18,6 +18,7 @@ export class UserPage {
   user;
   harvestLands;
   sellingPoints;
+  reviews;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.user = this.navParams.get('user');
@@ -43,7 +44,24 @@ export class UserPage {
         pictureURI : 'https://farm4.static.flickr.com/3784/19780434914_ffe4306723_b.jpg',
         name: 'Tu tienda',
 
-      }
+      },
+      this.reviews = [
+        {
+          name:"Juan del Pueblo",
+          description:"Really liked your products, will recommend to a friend."
+
+        },
+        {
+          name:"Juana Dolores",
+          description:"Some of the Aguacates had worms in them."
+        },
+        {
+          name: "Yulliane Rios",
+          description:"Thanks for the service, I really enjoyed all of your products"
+        }
+          
+          
+      ]
     ];
   }
 

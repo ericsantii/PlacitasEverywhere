@@ -254,7 +254,21 @@ var UserPage = (function () {
             {
                 pictureURI: 'https://farm4.static.flickr.com/3784/19780434914_ffe4306723_b.jpg',
                 name: 'Tu tienda',
-            }
+            },
+            this.reviews = [
+                {
+                    name: "Juan del Pueblo",
+                    description: "Really liked your products, will recommend to a friend."
+                },
+                {
+                    name: "Juana Dolores",
+                    description: "Some of the Aguacates had worms in them."
+                },
+                {
+                    name: "Yulliane Rios",
+                    description: "Thanks for the service, I really enjoyed all of your products"
+                }
+            ]
         ];
     }
     UserPage.prototype.ionViewDidLoad = function () {
@@ -265,11 +279,12 @@ var UserPage = (function () {
     };
     UserPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-user',template:/*ion-inline-start:"D:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\user\user.html"*/'<!--\n  Generated template for the UserPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n    <ion-navbar>\n      <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n      <ion-title></ion-title>\n    </ion-navbar>\n  </ion-header>\n  \n\n  <ion-content padding>\n    \n      <ion-img style="width: 450px; height: 325px;" src={{user.pictureURI}}></ion-img>\n      <h1 style="color:#000000;">{{user.firstName}} {{user.lastName}}</h1>\n      <h4 style="color:#000000;">UserID: {{user.userID}}</h4>\n      \n      \n      <h3 style="color:#000000;">Harvest Lands</h3>\n\n      <ion-list>\n          <ion-item *ngFor="let harvestLand of harvestLands" (click)="getHarvestInfo(harvestLand)">\n              <ion-label>{{harvestLand.name}}</ion-label>>\n          </ion-item>\n\n      </ion-list>\n\n      <h3 style="color:#000000;">Selling Points</h3>\n      <ion-list>\n          <ion-item *ngFor="let sellingPoint of sellingPoints" (click)="openSellingPoint(sellingPoint)">\n              <ion-label>{{sellingPoint.name}}</ion-label>>\n          </ion-item>\n\n      </ion-list>\n  </ion-content>'/*ion-inline-end:"D:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\user\user.html"*/,
+            selector: 'page-user',template:/*ion-inline-start:"D:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\user\user.html"*/'<!--\n\n  Generated template for the UserPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n    <ion-navbar>\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <ion-title></ion-title>\n\n    </ion-navbar>\n\n  </ion-header>\n\n  \n\n\n\n  <ion-content padding>\n\n    \n\n      <ion-img style="width: 450px; height: 325px;" src={{user.pictureURI}}></ion-img>\n\n      <h1 style="color:#000000;">{{user.firstName}} {{user.lastName}}</h1>\n\n      <h4 style="color:#000000;">UserID: {{user.userID}}</h4>\n\n      \n\n      \n\n      <h3 style="color:#000000;">Harvest Lands</h3>\n\n\n\n      <ion-list>\n\n          <ion-item *ngFor="let harvestLand of harvestLands" (click)="getHarvestInfo(harvestLand)">\n\n              <ion-label>{{harvestLand.name}}</ion-label>>\n\n          </ion-item>\n\n\n\n      </ion-list>\n\n\n\n      <h3 style="color:#000000;">Selling Points</h3>\n\n      <ion-list>\n\n          <ion-item *ngFor="let sellingPoint of sellingPoints" (click)="openSellingPoint(sellingPoint)">\n\n              <ion-label>{{sellingPoint.name}}</ion-label>>\n\n          </ion-item>\n\n\n\n      </ion-list>\n\n      <ion-list>\n\n            <h3 style="color:#000000;">Reviews</h3>\n\n      </ion-list>\n\n            <ion-item *ngFor = "let review of reviews">\n\n                <ion-label>{{review.name}}</ion-label>\n\n                <ion-label>{{review.description}}</ion-label>\n\n            </ion-item>\n\n  </ion-content>'/*ion-inline-end:"D:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\user\user.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object])
     ], UserPage);
     return UserPage;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=user.js.map

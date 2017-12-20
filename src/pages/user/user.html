@@ -37,4 +37,11 @@
           </ion-item>
 
       </ion-list>
+      <ion-list>
+            <h3 style="color:#000000;">Reviews</h3>
+      </ion-list>
+            <ion-item *ngFor = "let review of reviews">
+                <ion-label>{{review.name}}</ion-label>
+                <ion-label>{{review.description}}</ion-label>
+            </ion-item>
   </ion-content>
