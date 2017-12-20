@@ -15,7 +15,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SellingPointPage {
 
+  sellingPoint;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.sellingPoint = this.navParams.get('sellingPoint');
   }
 
   ionViewDidLoad() {

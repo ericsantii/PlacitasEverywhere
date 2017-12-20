@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HarvestPage } from '../harvest/harvest';
+import { SellingPointPage } from '../selling-point/selling-point';
+
 
 /**
  * Generated class for the UserPage page.
@@ -71,6 +73,11 @@ export class UserPage {
 
   getHarvestInfo(harvestLand){
     this.navCtrl.push(HarvestPage, {harvestLand : harvestLand});
+  }
+
+  goToSellingPoint(sellingPoint){
+    this.navCtrl.push(SellingPointPage, {sellingPoint : sellingPoint})
+
   }
 
 }
