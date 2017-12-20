@@ -10,6 +10,11 @@ import { SignUpPage } from '../pages/sign-up/sign-up';
 import { PostNewProductPage } from '../pages/post-new-product/post-new-product';
 import { SearchPage } from '../pages/search/search';
 import { ProductPage } from '../pages/product/product';
+import { CartPage } from '../pages/cart/cart';
+import { SellingPointPage } from '../pages/selling-point/selling-point';
+
+
+
 
 
 
@@ -32,7 +37,10 @@ export class MyApp {
       { title: 'Product Board', component: ListPage },
       { title: 'Sign In', component: SignInPage },
       { title: 'Post New Product', component: PostNewProductPage },
-      { title: 'Search', component: SearchPage }
+      { title: 'Search', component: SearchPage },
+      { title: 'Cart', component: CartPage }
+
+      
     ];
 
   }

@@ -10,6 +10,11 @@ import { SignUpPage } from '../pages/sign-up/sign-up';
 import { PostNewProductPage } from '../pages/post-new-product/post-new-product';
 import { SearchPage } from '../pages/search/search';
 import { ProductPage } from '../pages/product/product';
+import { CartPage } from '../pages/cart/cart';
+import { UserPage } from '../pages/user/user';
+import { SellingPointPage } from '../pages/selling-point/selling-point';
+
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -26,7 +31,10 @@ import { SellerService } from '../providers/sellers-service-mock';
     PostNewProductPage,
     SearchPage,
     ProductPage,
-    SellerPage
+    SellerPage,
+    CartPage,
+    UserPage,
+    SellingPointPage
   ],
   imports: [
     BrowserModule,
@@ -42,7 +50,10 @@ import { SellerService } from '../providers/sellers-service-mock';
     PostNewProductPage,
     SearchPage,
     ProductPage,
-    SellerPage
+    SellerPage,
+    CartPage,
+    UserPage,
+    SellingPointPage
   ],
   providers: [
     StatusBar,

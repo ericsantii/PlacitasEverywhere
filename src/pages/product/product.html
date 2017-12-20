@@ -18,10 +18,18 @@
     <ion-img style="width: 450px; height: 325px;" src={{product.pictureURI}}></ion-img>
     <h1 style="color:#000000;">{{product.productName}}</h1>
     <h4 style="color:#000000;">{{product.price}}</h4>
-    <p>Harvest Land: {{product.harvestLandID}}</p>
-    <p>Seller: {{product.sellerID}}</p>
-    <ion-item>
-        <ion-label color="primary">Qty:</ion-label>
-        <ion-input placeholder=""></ion-input>
-      </ion-item>
+    
+    <ion-item (click)="goToSeller({sellerID : 'Forzzark'})">
+        <ion-label>Seller: {{product.sellerID}}</ion-label>
+    </ion-item>
+    <ion-item (click)="goToHarvestLand(harvestLandID)">
+        <ion-label>Harvest Land: {{product.harvestLandID}}</ion-label>
+    </ion-item>
+    <form (ngSubmit)="addToCart(product)">
+        <ion-item>
+            <ion-label> Qty:</ion-label>
+            <ion-input [(ngModel)]="quantity" name="quantity" type="number"></ion-input>
+        </ion-item>
+      <button ion-button type="submit" block>Add to Cart</button>
+    </form>
 </ion-content>

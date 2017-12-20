@@ -48,7 +48,7 @@ export class SearchPage {
       pictureURI : 'https://www.oasis-botanical.ca/wp-content/uploads/2017/02/orange-web.jpg',
       pricingOption : 'p',
       harvestLandID : '453453',
-      sellerID: 'Pepito'
+      sellerID: 'Pepitoo'
     }
   ]
 

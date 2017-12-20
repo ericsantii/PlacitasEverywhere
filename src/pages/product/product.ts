@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {UserPage} from '../user/user'
 
 /**
  * Generated class for the ProductPage page.
@@ -16,6 +17,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class ProductPage {
 
   product;
+  quantity: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.product = this.navParams.get('product');
@@ -26,4 +28,24 @@ export class ProductPage {
     console.log('ionViewDidLoad ProductPage');
   }
 
+  addToCart(product){
+    //add to cart
+  }
+
+  goToSeller(sellerID){
+    this.navCtrl.push(UserPage, 
+      {user: {
+        firstName : 'Fernando',
+        lastName : 'Ortiz',
+        userID : 'Forzzark',
+        pictureURI: 'sdsdfg'
+
+      }}
+  );
+
+  }
+  gotToHarvestLand(harvestLandID){
+
+
+  }
 }
