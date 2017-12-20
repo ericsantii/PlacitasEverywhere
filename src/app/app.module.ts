@@ -4,7 +4,6 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { SignInPage } from '../pages/sign-in/sign-in';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { PostNewProductPage } from '../pages/post-new-product/post-new-product';
@@ -13,20 +12,21 @@ import { ProductPage } from '../pages/product/product';
 import { CartPage } from '../pages/cart/cart';
 import { UserPage } from '../pages/user/user';
 import { SellingPointPage } from '../pages/selling-point/selling-point';
-
+import { HttpClientModule } from '@angular/common/http'; 
+import { HttpModule } from '@angular/http';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SellerPage } from '../pages/seller/seller';
-import { SellerService } from '../providers/sellers-service-mock';
 import { HarvestPage } from '../pages/harvest/harvest';
+import { AccountsProvider } from '../providers/accounts/accounts';
+
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
     SignInPage,
     SignUpPage,
     PostNewProductPage,
@@ -37,16 +37,17 @@ import { HarvestPage } from '../pages/harvest/harvest';
     UserPage,
     SellingPointPage,
     HarvestPage
-  ],
+    ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    HttpModule,
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
     SignInPage,
     SignUpPage,
     PostNewProductPage,
@@ -61,8 +62,8 @@ import { HarvestPage } from '../pages/harvest/harvest';
   providers: [
     StatusBar,
     SplashScreen,
-    SellerService,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AccountsProvider
   ]
 })
 export class AppModule {}
