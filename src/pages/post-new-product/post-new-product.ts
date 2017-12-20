@@ -16,7 +16,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class PostNewProductPage {
   productName:string;
   pictureURI:string;
-  harvestLand:string;
+  harvestLandID:string;
   pricingOption:string;
   price:number;
 

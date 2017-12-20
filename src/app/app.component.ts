@@ -9,7 +9,7 @@ import { SignInPage } from '../pages/sign-in/sign-in';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { PostNewProductPage } from '../pages/post-new-product/post-new-product';
 import { SearchPage } from '../pages/search/search';
-
+import { ProductPage } from '../pages/product/product';
 
 
 

@@ -9,6 +9,7 @@ import { SignInPage } from '../pages/sign-in/sign-in';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { PostNewProductPage } from '../pages/post-new-product/post-new-product';
 import { SearchPage } from '../pages/search/search';
+import { ProductPage } from '../pages/product/product';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -21,7 +22,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SignInPage,
     SignUpPage,
     PostNewProductPage,
-    SearchPage
+    SearchPage,
+    ProductPage
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SignInPage,
     SignUpPage,
     PostNewProductPage,
-    SearchPage
+    SearchPage,
+    ProductPage
   ],
   providers: [
     StatusBar,

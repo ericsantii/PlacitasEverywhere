@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import {ProductPage} from '../product/product';
 /**
  * Generated class for the SearchPage page.
  *
@@ -15,26 +15,40 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SearchPage {
 
-  items =[
+  products =[
     {
-      name : 'Aguacate',
+      productName : 'Aguacate',
       price : '$100.00',
-      uri: 'https://www.organicfacts.net/wp-content/uploads/avocado.jpg'
+      pictureURI: 'https://www.organicfacts.net/wp-content/uploads/avocado.jpg',
+      pricingOption : 'q',
+      harvestLandID : '543453',
+      sellerID: 'Pepito'
+
+      
     },
     {
-      name : 'Gandules',
+      productName : 'Guineo',
       price : '$50.00',
-      uri: 'https://www.organicfacts.net/wp-content/uploads/avocado.jpg'
+      pictureURI: 'https://www.organicfacts.net/wp-content/uploads/2013/05/Banana3.jpg',
+      pricingOption : 'q',
+      harvestLandID : '453453',
+      sellerID: 'Pepito'
     },
     {
-      name : 'Parcha',
+      productName : 'Parcha',
       price : '$75.00',
-      uri: 'https://www.organicfacts.net/wp-content/uploads/avocado.jpg'
+      pictureURI: 'https://qph.ec.quoracdn.net/main-qimg-fa2ddc3dd7569564b3f77eeca059e045-c',
+      pricingOption : 'q',
+      harvestLandID : '453453',
+      sellerID: 'Pepito'
     },
     {
-      name : 'China',
+      productName : 'China',
       price : '$25.00',
-      uri: 'https://www.oasis-botanical.ca/wp-content/uploads/2017/02/orange-web.jpg'
+      pictureURI : 'https://www.oasis-botanical.ca/wp-content/uploads/2017/02/orange-web.jpg',
+      pricingOption : 'p',
+      harvestLandID : '453453',
+      sellerID: 'Pepito'
     }
   ]
 
@@ -55,4 +69,7 @@ export class SearchPage {
     
     }
 
+    openProductPage(item){
+      this.navCtrl.push(ProductPage, item);
+    }
 }
