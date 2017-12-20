@@ -12,6 +12,8 @@ import { SearchPage } from '../pages/search/search';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { SellerPage } from '../pages/seller/seller';
+import { SellerService } from '../providers/sellers-service-mock';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SignInPage,
     SignUpPage,
     PostNewProductPage,
-    SearchPage
+    SearchPage,
+    SellerPage
   ],
   imports: [
     BrowserModule,
@@ -35,11 +38,13 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SignInPage,
     SignUpPage,
     PostNewProductPage,
-    SearchPage
+    SearchPage,
+    SellerPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    SellerService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
