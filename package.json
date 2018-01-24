@@ -36,5 +36,13 @@
     "@ionic/app-scripts": "3.1.5",
     "typescript": "2.4.2"
   },
-  "description": "An Ionic project"
+  "description": "Placitas Everywhere: An Ionic project",
+  "cordovaPlugins": [
+    "cordova-plugin-whitelist",
+    "cordova-plugin-splashscreen",
+    "cordova-plugin-console",
+    "cordova-plugin-device",
+    "ionic-plugin-keyboard"
+  ],
+  "cordovaPlatforms": []
 }

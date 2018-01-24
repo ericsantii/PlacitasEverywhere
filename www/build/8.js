@@ -1,10 +1,6 @@
 webpackJsonp([8],{
 
-<<<<<<< HEAD
-/***/ 284:
-=======
-/***/ 291:
->>>>>>> e56edd86e82aec2e551ba3d53163840703fe9d12
+/***/ 292:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
