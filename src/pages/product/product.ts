@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {UserPage} from '../user/user'
+import { UserPage } from '../user/user'
 import { HarvestPage } from '../harvest/harvest';
 
 /**
@@ -21,7 +21,7 @@ export class ProductPage {
   quantity: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    
+
     this.product = this.navParams.get('product');
     console.log(this.product);
   }
@@ -30,34 +30,38 @@ export class ProductPage {
     console.log('ionViewDidLoad ProductPage');
   }
 
-  
-  getHarvestInfo(item){
-    this.navCtrl.push(HarvestPage,
-      {harvestLand: {
-        name: 'My Posita',
-        pictureURI : 'http://www.puertoricoexplore.com/uploads/small_finca.jpg',
-        
 
-      }}
-    
-    
+  getHarvestInfo(item) {
+    this.navCtrl.push(HarvestPage,
+      {
+        harvestLand: {
+          name: 'My Posita',
+          pictureURI: 'http://www.puertoricoexplore.com/uploads/small_finca.jpg',
+
+
+        }
+      }
+
+
     );
   }
 
-  addToCart(product){
+  addToCart(product) {
     //add to cart
   }
 
-  goToSeller(sellerID){
-    this.navCtrl.push(UserPage, 
-      {user: {
-        firstName : 'Fernando',
-        lastName : 'Ortiz',
-        userID : 'Forzzark',
-        pictureURI: 'sdsdfg'
+  goToSeller(sellerID) {
+    this.navCtrl.push(UserPage,
+      {
+        user: {
+          firstName: 'Fernando',
+          lastName: 'Ortiz',
+          userID: 'Forzzark',
+          pictureURI: 'sdsdfg'
 
-      }}
-  );
+        }
+      }
+    );
 
   }
 

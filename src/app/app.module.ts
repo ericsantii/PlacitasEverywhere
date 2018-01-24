@@ -22,6 +22,8 @@ import { SellerPage } from '../pages/seller/seller';
 import { HarvestPage } from '../pages/harvest/harvest';
 import { AccountsProvider } from '../providers/accounts/accounts';
 import { UserFactoryProvider } from '../providers/user-factory/user-factory';
+import { ProductFactoryProvider } from '../providers/product-factory/product-factory';
+import { ProductRepositoryProvider } from '../providers/product-repository/product-repository';
 
 
 @NgModule({
@@ -65,7 +67,9 @@ import { UserFactoryProvider } from '../providers/user-factory/user-factory';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AccountsProvider,
-    UserFactoryProvider
+    UserFactoryProvider,
+    ProductFactoryProvider,
+    ProductRepositoryProvider
   ]
 })
 export class AppModule {}
