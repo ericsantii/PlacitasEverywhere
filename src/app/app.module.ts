@@ -21,9 +21,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { SellerPage } from '../pages/seller/seller';
 import { HarvestPage } from '../pages/harvest/harvest';
 import { UserFactoryProvider } from '../providers/user-factory/user-factory';
+<<<<<<< HEAD
 import { ProductFactoryProvider } from '../providers/product-factory/product-factory';
 import { ProductRepositoryProvider } from '../providers/product-repository/product-repository';
 import { UserRepositoryProvider } from '../providers/user-repository/user-repository';
+=======
+>>>>>>> parent of d7dc92d5... Post Product
 
 
 @NgModule({
@@ -66,11 +69,16 @@ import { UserRepositoryProvider } from '../providers/user-repository/user-reposi
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+<<<<<<< HEAD
     UserFactoryProvider,
     ProductFactoryProvider,
     ProductRepositoryProvider,
     UserFactoryProvider,
     UserRepositoryProvider
+=======
+    AccountsProvider,
+    UserFactoryProvider
+>>>>>>> parent of d7dc92d5... Post Product
   ]
 })
 export class AppModule {}
