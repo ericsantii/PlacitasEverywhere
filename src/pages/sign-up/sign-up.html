@@ -10,34 +10,34 @@
   
   <ion-content padding="true" class="has-header">
     <h1 style="color:#000000;text-align:center;">Sign Up</h1>
-    <form (ngSubmit)="signUp()">
+    <form (ngSubmit)="signUp(userID.value, password.value, firstName.value, lastName.value, email.value, phone.value, pictureURI.value)">
         <ion-item>
           <ion-label>UserID</ion-label>
-          <ion-input [(ngModel)]="userID" name="userID" type="text"></ion-input>
+          <ion-input type="text" #userID></ion-input>
         </ion-item>
         <ion-item>
             <ion-label>Password</ion-label>
-            <ion-input [(ngModel)]="password" name="password" type="password"></ion-input>
+            <ion-input type="password" #password></ion-input>
         </ion-item>
         <ion-item>
             <ion-label>First Name</ion-label>
-            <ion-input [(ngModel)]="firstName" name="firstName" type="text"></ion-input>
+            <ion-input type="text" #firstName></ion-input>
         </ion-item>
         <ion-item>
             <ion-label>Last Name</ion-label>
-            <ion-input [(ngModel)]="lastName" name="password" type="text"></ion-input>
+            <ion-input type="text" #lastName></ion-input>
         </ion-item>
         <ion-item>
             <ion-label>Email</ion-label>
-            <ion-input [(ngModel)]="email" name="email" type="email"></ion-input>
+            <ion-input type="email" #email></ion-input>
         </ion-item>
         <ion-item>
             <ion-label>Phone Number</ion-label>
-            <ion-input [(ngModel)]="phoneNumber" name="phoneNumber" type="text"></ion-input>
+            <ion-input type="text" #phone></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>pictureURI</ion-label>
-          <ion-input [(ngModel)]="pictureURI" name="pictureURI" type="url"></ion-input>
+          <ion-input type="url" #pictureURI></ion-input>
       </ion-item>
         <button ion-button type="submit" block>Sign Up</button>
       </form>

@@ -20,8 +20,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SellerPage } from '../pages/seller/seller';
 import { HarvestPage } from '../pages/harvest/harvest';
-import { AccountsProvider } from '../providers/accounts/accounts';
 import { UserFactoryProvider } from '../providers/user-factory/user-factory';
+import { UserRepositoryProvider } from '../providers/user-repository/user-repository';
 
 
 @NgModule({
@@ -64,8 +64,8 @@ import { UserFactoryProvider } from '../providers/user-factory/user-factory';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AccountsProvider,
-    UserFactoryProvider
+    UserFactoryProvider,
+    UserRepositoryProvider
   ]
 })
 export class AppModule {}

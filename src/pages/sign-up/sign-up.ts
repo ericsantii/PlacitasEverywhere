@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HomePage } from '../home/home';
-import { AccountsProvider } from '../../providers/accounts/accounts';
+import { UserFactoryProvider } from '../../providers/user-factory/user-factory';
+import { UserRepositoryProvider } from '../../providers/user-repository/user-repository';
+import {User} from '../../Models/User'
 
 
 /**
@@ -16,16 +18,10 @@ import { AccountsProvider } from '../../providers/accounts/accounts';
   selector: 'page-sign-up',
   templateUrl: 'sign-up.html',
 })
-export class SignUpPage {
-  userID:string;
-  password:string;
-  firstName:string;
-  lastName:string;
-  email:string;
-  phoneNumber:string;
-  pictureURI:string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public service:AccountsProvider) {
+export class SignUpPage {
+  user:User;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userFactory:UserFactoryProvider, public userRepository:UserRepositoryProvider) {
 
   }
 
@@ -33,9 +29,10 @@ export class SignUpPage {
     console.log('ionViewDidLoad SignUpPage');
   }
 
-  signUp(){
-    this.service.createAccount(this.firstName, this.lastName, this.userID, this.email, this.password, this.phoneNumber, this.pictureURI);
-
+  signUp(userID, password, firstName, lastName, email, phone, pictureURI){
+    
+    this.user= this.userFactory.createUser(firstName, lastName, userID,email, password, phone, pictureURI);
+    this.userRepository.saveNewUser(this.user);
   }
 
 }
