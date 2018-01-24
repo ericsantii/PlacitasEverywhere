@@ -21,6 +21,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { SellerPage } from '../pages/seller/seller';
 import { HarvestPage } from '../pages/harvest/harvest';
 import { AccountsProvider } from '../providers/accounts/accounts';
+import { UserFactoryProvider } from '../providers/user-factory/user-factory';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { AccountsProvider } from '../providers/accounts/accounts';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AccountsProvider
+    AccountsProvider,
+    UserFactoryProvider
   ]
 })
 export class AppModule {}

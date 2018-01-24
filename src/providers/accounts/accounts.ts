@@ -18,7 +18,7 @@ export class AccountsProvider {
 
   constructor(public http: HttpClient) {
     console.log('Hello AccountsProvider Provider');
-    this.url = 'http://206.248.103.138:3005/api/user';
+    this.url = 'http://localhost:3005/api/user';
   }
 
   createAccount(firstName:string, lastName:string, userID:string, email:string, password:string, phone:string, pictureURI:string){
