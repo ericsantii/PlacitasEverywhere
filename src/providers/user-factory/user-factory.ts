@@ -19,7 +19,7 @@ export class UserFactoryProvider {
     this.user = {
       firstName : firstName, 
       lastName:lastName, 
-      UserID: userID, 
+      userID: userID, 
       email:email, 
       password:password, 
       phone:phone, 

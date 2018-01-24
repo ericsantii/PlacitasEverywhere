@@ -16,7 +16,11 @@ import { ProductFactoryProvider } from '../../providers/product-factory/product-
   templateUrl: 'post-new-product.html',
 })
 export class PostNewProductPage {
+<<<<<<< HEAD
   product: Product
+=======
+  
+>>>>>>> c3443db2fca5c20121a761ce676ca24ad40e4cc4
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public service: ProductFactoryProvider) {
   }
