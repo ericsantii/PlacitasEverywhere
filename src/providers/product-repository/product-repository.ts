@@ -21,7 +21,7 @@ export class ProductRepositoryProvider {
   postP(product) {
     console.log("AtCreateAccount")
 
-    const req = this.http.post(this.url, stringify(product)).subscribe(
+    const req = this.http.post(this.url, JSON.stringify(product)).subscribe(
       res => {
         console.log(res);
       },
