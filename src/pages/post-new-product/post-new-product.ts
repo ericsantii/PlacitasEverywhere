@@ -14,16 +14,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'post-new-product.html',
 })
 export class PostNewProductPage {
-<<<<<<< HEAD
-  product: Product
-  
-=======
   productName:string;
   pictureURI:string;
   harvestLandID:string;
   pricingOption:string;
   price:number;
->>>>>>> parent of d7dc92d5... Post Product
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
