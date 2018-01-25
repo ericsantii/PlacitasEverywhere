@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Product } from '../../Models/Product';
+import { ProductFactoryProvider } from '../../providers/product-factory/product-factory';
+import { ProductRepositoryProvider } from '../../providers/product-repository/product-repository';
+import { query } from '@angular/core/src/animation/dsl';
+
 
 /**
  * Generated class for the PostNewProductPage page.
@@ -14,21 +19,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'post-new-product.html',
 })
 export class PostNewProductPage {
-  productName:string;
-  pictureURI:string;
-  harvestLandID:string;
-  pricingOption:string;
-  price:number;
+  product : Product;
+  
 
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public productFactory: ProductFactoryProvider, public productRepository: ProductRepositoryProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PostNewProductPage');
   }
 
-  postProduct(){
-    //
+  postProduct(name, productType, pictureURI, harvestLandID, pricingOption, pricePerUnit) {
+    this.product = this.productFactory.createProduct(name, pictureURI, harvestLandID,pricingOption,pricePerUnit, productType, localStorage.getItem('loggedInID'));
+    this.productRepository.postProduct(this.product);
   }
 }

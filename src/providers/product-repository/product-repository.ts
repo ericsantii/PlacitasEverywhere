@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from '../../Models/Product';
-import { stringify } from '@angular/compiler/src/util';
+import { Http, Headers, RequestOptions } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 /*
   Generated class for the ProductRepositoryProvider provider.
@@ -14,14 +15,18 @@ export class ProductRepositoryProvider {
   url: string;
   product: Product
 
-  constructor(public http: HttpClient) {
+  constructor(public http: Http) {
     console.log('Hello ProductRepositoryProvider Provider');
-    this.url = 'http://localhost:3005/api/products';
+    this.url = 'http://24.48.230.114:3005';
   }
-  postP(product) {
-    console.log("AtCreateAccount")
 
-    const req = this.http.post(this.url, JSON.stringify(product)).subscribe(
+  postProduct(product:Product) {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({ headers: headers });
+    const req = this.http.post(this.url + '/api/products', JSON.stringify(product), options)
+    .map((res) => res.json())
+    .subscribe(
       res => {
         console.log(res);
       },
@@ -29,6 +34,13 @@ export class ProductRepositoryProvider {
         console.log("Error Ocurred");
       }
     )
+  }
+
+  searchProductsMatching(input){
+    
+    return this.http.get(this.url + '/api/product/name/' + input)
+    .map((res) => res.json())
+
   }
 
 

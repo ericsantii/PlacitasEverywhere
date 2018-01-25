@@ -3,7 +3,6 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import { SignInPage } from '../pages/sign-in/sign-in';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { PostNewProductPage } from '../pages/post-new-product/post-new-product';
@@ -22,12 +21,16 @@ import { SellerPage } from '../pages/seller/seller';
 import { HarvestPage } from '../pages/harvest/harvest';
 import { UserFactoryProvider } from '../providers/user-factory/user-factory';
 import { UserRepositoryProvider } from '../providers/user-repository/user-repository';
+import { ProductFactoryProvider } from '../providers/product-factory/product-factory';
+import { ProductRepositoryProvider } from '../providers/product-repository/product-repository';
+import { AuthenticationServiceProvider } from '../providers/authentication-service/authentication-service';
+import { HarvestLandRepositoryProvider } from '../providers/harvest-land-repository/harvest-land-repository';
+import { HarvestLandFactoryProvider } from '../providers/harvest-land-factory/harvest-land-factory';
 
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
     SignInPage,
     SignUpPage,
     PostNewProductPage,
@@ -48,7 +51,6 @@ import { UserRepositoryProvider } from '../providers/user-repository/user-reposi
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
     SignInPage,
     SignUpPage,
     PostNewProductPage,
@@ -65,7 +67,12 @@ import { UserRepositoryProvider } from '../providers/user-repository/user-reposi
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserRepositoryProvider,
-    UserFactoryProvider
+    UserFactoryProvider,
+    ProductFactoryProvider,
+    ProductRepositoryProvider,
+    AuthenticationServiceProvider,
+    HarvestLandRepositoryProvider,
+    HarvestLandFactoryProvider,  
   ]
 })
 export class AppModule {}

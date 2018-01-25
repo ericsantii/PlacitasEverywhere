@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SignUpPage } from '../sign-up/sign-up';
 import { HomePage } from '../home/home';
+import { AuthenticationServiceProvider } from '../../providers/authentication-service/authentication-service';
 
 /**
  * Generated class for the SignInPage page.
@@ -21,7 +22,7 @@ export class SignInPage {
   password:string;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public authService:AuthenticationServiceProvider) {
   }
 
   ionViewDidLoad() {
@@ -33,8 +34,10 @@ export class SignInPage {
     console.log('Sign Up Button Clicked.');
 
   }
-  signIn(){
-    this.navCtrl.push(HomePage);
+  signIn(userID, password){
+      this.authService.authenticateUser(userID,password);
+      
+    
 
   }
   

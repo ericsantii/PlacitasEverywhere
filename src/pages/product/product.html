@@ -16,13 +16,18 @@
 <ion-content padding>
     
     <ion-img style="width: 450px; height: 325px;" src={{product.pictureURI}}></ion-img>
-    <h1 style="color:#000000;">{{product.productName}}</h1>
-    <h4 style="color:#000000;">{{product.price}}</h4>
+    <h1 style="color:#000000;">{{product.name}}</h1>
+    <h4 style="color:#000000;">{{product.pricePerUnit}} </h4>
+    <h4 style="color:#000000;" *ngIf ="byQuantity; else pricePerPound">each </h4>
     
+    <ng-template #pricePerPound>
+        <h4 style="color:#000000;">per Pound </h4>
+    </ng-template>
+
     <ion-item (click)="goToSeller({sellerID : 'Forzzark'})">
         <ion-label>Seller: {{product.sellerID}}</ion-label>
     </ion-item>
-    <ion-item (click)="getHarvestInfo({})">
+    <ion-item (click)="getHarvestInfo(product)">
         <ion-label>Harvest Land: {{product.harvestLandID}}</ion-label>
     </ion-item>
     <form (ngSubmit)="addToCart(product)">

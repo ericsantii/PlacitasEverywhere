@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {ProductPage} from '../product/product';
+import { ProductRepositoryProvider } from '../../providers/product-repository/product-repository';
+import { ProductFactoryProvider } from '../../providers/product-factory/product-factory';
+import { Product } from '../../Models/Product';
+
+
 /**
  * Generated class for the SearchPage page.
  *
@@ -15,44 +20,9 @@ import {ProductPage} from '../product/product';
 })
 export class SearchPage {
 
-  products =[
-    {
-      productName : 'Aguacate',
-      price : '$100.00',
-      pictureURI: 'https://www.organicfacts.net/wp-content/uploads/avocado.jpg',
-      pricingOption : 'q',
-      harvestLandID : '543453',
-      sellerID: 'Pepito'
+  products:Product[];
 
-      
-    },
-    {
-      productName : 'Guineo',
-      price : '$50.00',
-      pictureURI: 'https://www.organicfacts.net/wp-content/uploads/2013/05/Banana3.jpg',
-      pricingOption : 'q',
-      harvestLandID : '453453',
-      sellerID: 'Pepito'
-    },
-    {
-      productName : 'Parcha',
-      price : '$75.00',
-      pictureURI: 'https://qph.ec.quoracdn.net/main-qimg-fa2ddc3dd7569564b3f77eeca059e045-c',
-      pricingOption : 'q',
-      harvestLandID : '453453',
-      sellerID: 'Pepito'
-    },
-    {
-      productName : 'China',
-      price : '$25.00',
-      pictureURI : 'https://www.oasis-botanical.ca/wp-content/uploads/2017/02/orange-web.jpg',
-      pricingOption : 'p',
-      harvestLandID : '453453',
-      sellerID: 'Pepitoo'
-    }
-  ]
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public productRepository:ProductRepositoryProvider, public productFactory:ProductFactoryProvider) {
   }
 
   ionViewDidLoad() {
@@ -64,12 +34,24 @@ export class SearchPage {
 
   }
 
-    onInput($event){
-    //
+    onInput(input){
+      
+      if(input != ''){
+      this.productRepository.searchProductsMatching(input).subscribe(
+        (res) => {
+          this.products = this.productFactory.createProductsFromJSON(res);
+          
+        },
+        err => {
+          console.log("Error Ocurred");
+        }
+      );
+    }
     
     }
 
     openProductPage(item){
+      console.log(item)
       this.navCtrl.push(ProductPage, item);
     }
 }

@@ -10,15 +10,15 @@
   
   <ion-content padding="true" class="has-header">
     <h1 style="color:#000000;text-align:center;">Sign In</h1>
-    <form (ngSubmit)="signIn()">
+    <form (ngSubmit)="signIn(userID.value, password.value)">
       <ion-item>
         <ion-label> UserID</ion-label>
-        <ion-input [(ngModel)]="userID" name="userID" type="text"></ion-input>
+        <ion-input #userID type="text"></ion-input>
       </ion-item>
 
       <ion-item>
           <ion-label> Password</ion-label>
-          <ion-input [(ngModel)]="password" name="password" type="password"></ion-input>
+          <ion-input #password type="password"></ion-input>
       </ion-item>
       <button ion-button type="submit" block>Sign In</button>
     </form>
