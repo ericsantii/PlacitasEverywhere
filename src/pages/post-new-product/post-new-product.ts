@@ -7,7 +7,7 @@ import { ProductFactoryProvider } from '../../providers/product-factory/product-
  * Generated class for the PostNewProductPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
+ * Ionic pages and navigation.caca
  */
 
 @IonicPage()
