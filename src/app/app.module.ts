@@ -21,8 +21,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { SellerPage } from '../pages/seller/seller';
 import { HarvestPage } from '../pages/harvest/harvest';
 import { UserFactoryProvider } from '../providers/user-factory/user-factory';
-import { ProductFactoryProvider } from '../providers/product-factory/product-factory';
-import { ProductRepositoryProvider } from '../providers/product-repository/product-repository';
 import { UserRepositoryProvider } from '../providers/user-repository/user-repository';
 
 
@@ -66,11 +64,8 @@ import { UserRepositoryProvider } from '../providers/user-repository/user-reposi
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UserFactoryProvider,
-    ProductFactoryProvider,
-    ProductRepositoryProvider,
-    UserFactoryProvider,
-    UserRepositoryProvider
+    UserRepositoryProvider,
+    UserFactoryProvider
   ]
 })
 export class AppModule {}

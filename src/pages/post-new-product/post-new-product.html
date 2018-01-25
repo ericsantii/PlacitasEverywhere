@@ -13,40 +13,40 @@
   </ion-navbar>
 </ion-header>
 
-
-<ion-content padding="true" class="has-header">
-  <form (ngSubmit)="postProduct(productName, productType, pictureURI, harvestLandID, pricingOption, pricePerUnit)">
-    <ion-item>
-      <ion-label>Product Name</ion-label>
-      <ion-input type="text" #productName></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Product Type</ion-label>
-      <ion-select #productType>
-        <ion-option value="f">Fruit</ion-option>
-        <ion-option value="v">Vegetable</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label>Picture URI</ion-label>
-      <ion-input type="url" #pictureURI></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Harvest Land</ion-label>
-      <ion-select #harvestLandID>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label>Pricing Option</ion-label>
-      <ion-select #pricingOption>
-        <ion-option value="q">By Quantity</ion-option>
-        <ion-option value="p">By Pounds</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item>
-      <ion-label>Price by Unit</ion-label>
-      <ion-input type="number" #pricePerUnit></ion-input>
-    </ion-item>
-    <button ion-button type="submit" block>Post Product</button>
-  </form>
-</ion-content>
+  
+  <ion-content padding="true" class="has-header">
+      <form (ngSubmit)="postProduct()">
+          <ion-item>
+            <ion-label>Product Name</ion-label>
+            <ion-input [(ngModel)]="productName" name="productName" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label>Product Type</ion-label>
+              <ion-select [(ngModel)]="productType" name="productType">
+                  <ion-option value="f">Fruit</ion-option>
+                  <ion-option value="v">Vegetable</ion-option>
+                </ion-select>
+          </ion-item>
+          <ion-item>
+              <ion-label>Picture URI</ion-label>
+              <ion-input [(ngModel)]="pictureURI" name="pictureURI" type="url"></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label>Harvest Land</ion-label>
+              <ion-select [(ngModel)]="harvestLand" name="harvestLandID"> 
+                </ion-select>
+          </ion-item>
+          <ion-item>
+              <ion-label>Pricing Option</ion-label>
+              <ion-select [(ngModel)]="pricingOption" name="pricingOption">
+                  <ion-option value="q">By Quantity</ion-option>
+                  <ion-option value="p">By Pounds</ion-option>
+                </ion-select>
+          </ion-item>
+          <ion-item>
+              <ion-label>Price by Unit</ion-label>
+              <ion-input [(ngModel)]="price" name="price" type="number"></ion-input>
+          </ion-item>
+          <button ion-button type="submit" block>Post Product</button>
+        </form>
+  </ion-content>

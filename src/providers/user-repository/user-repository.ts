@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from "../../Models/User";
 import { Http, Headers, RequestOptions } from '@angular/http';
-
+import 'rxjs/add/operator/map';
 /*
   Generated class for the UserRepositoryProvider provider.
 
@@ -18,11 +18,12 @@ export class UserRepositoryProvider {
   }
 
   saveNewUser(user:User){
-    console.log(JSON.stringify(user));
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({ headers: headers });
-    const req= this.http.post(this.url , JSON.stringify(user), options).subscribe(
+    const req= this.http.post(this.url , JSON.stringify(user), options)
+    .map((res)=>res.json())
+    .subscribe(
       res => {
         console.log(res);
       },
