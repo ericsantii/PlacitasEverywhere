@@ -128,10 +128,9 @@ var PostNewProductPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-post-new-product',template:/*ion-inline-start:"D:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\post-new-product\post-new-product.html"*/'<!--\n\n  Generated template for the PostNewProductPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>Post New Product</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n  \n\n  <ion-content padding="true" class="has-header">\n\n      <form (ngSubmit)="postProduct()">\n\n          <ion-item>\n\n            <ion-label>Product Name</ion-label>\n\n            <ion-input [(ngModel)]="productName" name="productName" type="text"></ion-input>\n\n          </ion-item>\n\n          <ion-item>\n\n              <ion-label>Product Type</ion-label>\n\n              <ion-select [(ngModel)]="productType" name="productType">\n\n                  <ion-option value="f">Fruit</ion-option>\n\n                  <ion-option value="v">Vegetable</ion-option>\n\n                </ion-select>\n\n          </ion-item>\n\n          <ion-item>\n\n              <ion-label>Picture URI</ion-label>\n\n              <ion-input [(ngModel)]="pictureURI" name="pictureURI" type="url"></ion-input>\n\n          </ion-item>\n\n          <ion-item>\n\n              <ion-label>Harvest Land</ion-label>\n\n              <ion-select [(ngModel)]="harvestLand" name="harvestLandID"> \n\n                </ion-select>\n\n          </ion-item>\n\n          <ion-item>\n\n              <ion-label>Pricing Option</ion-label>\n\n              <ion-select [(ngModel)]="pricingOption" name="pricingOption">\n\n                  <ion-option value="q">By Quantity</ion-option>\n\n                  <ion-option value="p">By Pounds</ion-option>\n\n                </ion-select>\n\n          </ion-item>\n\n          <ion-item>\n\n              <ion-label>Price by Unit</ion-label>\n\n              <ion-input [(ngModel)]="price" name="price" type="number"></ion-input>\n\n          </ion-item>\n\n          <button ion-button type="submit" block>Post Product</button>\n\n        </form>\n\n  </ion-content>\n\n'/*ion-inline-end:"D:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\post-new-product\post-new-product.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
     ], PostNewProductPage);
     return PostNewProductPage;
-    var _a, _b;
 }());
 
 //# sourceMappingURL=post-new-product.js.map
@@ -676,8 +675,6 @@ var UserFactoryProvider = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UserRepositoryProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(166);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(300);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -687,7 +684,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
 
 
 /*
@@ -703,12 +699,11 @@ var UserRepositoryProvider = (function () {
         this.url = 'http://localhost:3005/api/user';
     }
     UserRepositoryProvider.prototype.saveNewUser = function (user) {
+        console.log(JSON.stringify(user));
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
         headers.append('Content-Type', 'application/json');
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* RequestOptions */]({ headers: headers });
-        var req = this.http.post(this.url, JSON.stringify(user), options)
-            .map(function (res) { return res.json(); })
-            .subscribe(function (res) {
+        var req = this.http.post(this.url, JSON.stringify(user), options).subscribe(function (res) {
             console.log(res);
         }, function (err) {
             console.log("Error");
@@ -716,10 +711,9 @@ var UserRepositoryProvider = (function () {
     };
     UserRepositoryProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
     ], UserRepositoryProvider);
     return UserRepositoryProvider;
-    var _a;
 }());
 
 //# sourceMappingURL=user-repository.js.map
