@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HarvestPage } from '../harvest/harvest';
 import { SellingPointPage } from '../selling-point/selling-point';
+import { HarvestLandRepositoryProvider } from '../../providers/harvest-land-repository/harvest-land-repository';
+import { HarvestLandFactoryProvider } from '../../providers/harvest-land-factory/harvest-land-factory';
+import { HarvestLand } from '../../Models/HarvestLand';
 
 
 /**
@@ -18,53 +21,28 @@ import { SellingPointPage } from '../selling-point/selling-point';
 })
 export class UserPage {
   user;
-  harvestLands;
+  harvestLands: HarvestLand[] = [];
   sellingPoints;
   reviews;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.user = this.navParams.get('user');
-    this.harvestLands = [
-      {
-        pictureURI : 'http://is4.mzstatic.com/image/thumb/Purple128/v4/55/a0/54/55a05489-286a-861d-0e6c-d2b68ef9cb89/source/1200x630bb.jpg',
-        name: 'Mi tierra',
+  constructor(public navCtrl: NavController, public navParams: NavParams, public harvestLandRepository: HarvestLandRepositoryProvider, public harvestLandFactory:HarvestLandFactoryProvider) {
+    //load seller info
+    this.user = this.navParams.get('seller');
+    //load harvest Lands
 
+    this.harvestLandRepository.getHarvestLandsFromUser(this.user.userID).toPromise().then(
+      res => {
+        this.harvestLands = this.harvestLandFactory.createHarvestLandsFromJSON(res);
       },
-      {
-        pictureURI : 'http://is4.mzstatic.com/image/thumb/Purple128/v4/55/a0/54/55a05489-286a-861d-0e6c-d2b68ef9cb89/source/1200x630bb.jpg',
-        name: 'Tu tierra',
-
+      err =>{
+        console.log(err);
       }
-    ];
-    this.sellingPoints = [
-      {
-        pictureURI : 'https://farm4.static.flickr.com/3784/19780434914_ffe4306723_b.jpg',
-        name: 'Mi tienda',
+    )
 
-      },
-      {
-        pictureURI : 'https://farm4.static.flickr.com/3784/19780434914_ffe4306723_b.jpg',
-        name: 'Tu tienda',
 
-      },
-      this.reviews = [
-        {
-          name:"Juan del Pueblo",
-          description:"Really liked your products, will recommend to a friend."
-
-        },
-        {
-          name:"Juana Dolores",
-          description:"Some of the Aguacates had worms in them."
-        },
-        {
-          name: "Yulliane Rios",
-          description:"Thanks for the service, I really enjoyed all of your products"
-        }
-          
-          
-      ]
-    ];
+    //load selling points
+      
+    //load reviews
   }
 
   ionViewDidLoad() {
@@ -80,4 +58,7 @@ export class UserPage {
 
   }
 
+  allowReview(){
+    return (localStorage.getItem('loggedInID') != this.user.userID)
+  }
 }

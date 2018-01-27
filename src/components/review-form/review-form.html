@@ -1,0 +1,25 @@
+<!-- Generated template for the ReviewFormComponent component -->
+<ion-content padding="true" class="has-header">
+  <h3 style="color:#000000;">Post Review</h3>
+  <form (ngSubmit)="postReview(title.value, rating.value, description.value)">
+    <ion-item>
+      <ion-label>Review Title</ion-label>
+      <ion-input type="text" #title></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Review Rating</ion-label>
+      <ion-select #rating>
+        <ion-option value="1">1</ion-option>
+        <ion-option value="2">2</ion-option>
+        <ion-option value="3">3</ion-option>
+        <ion-option value="4">4</ion-option>
+        <ion-option value="5">5</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Review Description</ion-label>
+      <ion-input type="text" #description></ion-input>
+    </ion-item>
+    <button ion-button type="submit" block>Post Review</button>
+  </form>
+</ion-content>

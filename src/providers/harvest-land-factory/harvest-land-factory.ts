@@ -26,4 +26,12 @@ export class HarvestLandFactoryProvider {
     return harvestLand;
   }
 
+  createHarvestLandsFromJSON(harvestLands){
+    var arrayOfHarvestLands:HarvestLand[] = [];
+    for(var harvestLand of harvestLands){
+      arrayOfHarvestLands.push(this.createHarvestLand(harvestLand));
+    }
+    return arrayOfHarvestLands;
+  }
+
 }

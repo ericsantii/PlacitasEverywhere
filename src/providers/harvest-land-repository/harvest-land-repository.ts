@@ -24,4 +24,10 @@ export class HarvestLandRepositoryProvider {
     .map((res) => res.json())
   
   }
+  getHarvestLandsFromUser(userID){
+    
+    return this.http.get(this.url + '/api/harvestLands/seller/' + userID)
+    .map((res) => res.json())
+  
+  }
 }

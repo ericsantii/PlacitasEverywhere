@@ -6,6 +6,8 @@ import { Product } from '../../Models/Product';
 import { HarvestLandRepositoryProvider } from '../../providers/harvest-land-repository/harvest-land-repository';
 import { HarvestLandFactoryProvider } from '../../providers/harvest-land-factory/harvest-land-factory';
 import { HarvestLand } from '../../Models/HarvestLand';
+import { UserRepositoryProvider } from '../../providers/user-repository/user-repository';
+import { UserFactoryProvider } from '../../providers/user-factory/user-factory';
 
 /**
  * Generated class for the ProductPage page.
@@ -25,8 +27,7 @@ export class ProductPage {
   quantity: number;
   byQuantity: boolean = false;
   byWeight: boolean = false;
-  harvestLand:HarvestLand;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public harvestLandRepository:HarvestLandRepositoryProvider, public harvestLandFactory:HarvestLandFactoryProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public harvestLandRepository:HarvestLandRepositoryProvider, public harvestLandFactory:HarvestLandFactoryProvider, public userRepository: UserRepositoryProvider, public userFactory: UserFactoryProvider) {
     
     this.product = this.navParams.get('product');
     if(this.product.pricingOption == 'q'){
@@ -35,14 +36,7 @@ export class ProductPage {
       this.byWeight = true;
     }
     
-    this.harvestLandRepository.getHarvestLand(this.product.harvestLandID).subscribe(
-      res => {
-        this.harvestLand = this.harvestLandFactory.createHarvestLand(res);
-      },
-      err =>{
-        console.log(err);
-      }
-    )
+  
   }
 
   ionViewDidLoad() {
@@ -51,8 +45,17 @@ export class ProductPage {
 
   
   getHarvestInfo(product){
-    console.log(this.harvestLand);
-    this.navCtrl.push(HarvestPage, {harvestLand:this.harvestLand});
+    
+    this.harvestLandRepository.getHarvestLand(this.product.harvestLandID).toPromise().then(
+      res => {
+        var harvestLand = this.harvestLandFactory.createHarvestLand(res);
+        this.navCtrl.push(HarvestPage, {harvestLand: harvestLand});
+      },
+      err =>{
+        console.log(err);
+      }
+    )
+    
   }
 
   addToCart(product){
@@ -60,15 +63,18 @@ export class ProductPage {
   }
 
   goToSeller(sellerID){
-    this.navCtrl.push(UserPage, 
-      {user: {
-        firstName : 'Fernando',
-        lastName : 'Ortiz',
-        userID : 'Forzzark',
-        pictureURI: 'sdsdfg'
-
-      }}
-  );
+    this.userRepository.getUser(this.product.sellerID).toPromise().then(
+      res => {
+        var seller = this.userFactory.createUser(res.firstName, res.lastName, res.userID,res.email,res.password,res.phone, res.pictureURI);
+        console.log('seller',seller);
+        this.navCtrl.push(UserPage, {seller: seller});
+      },
+      err =>{
+        console.log(err);
+      }
+    )
+    
+  
 
   }
 

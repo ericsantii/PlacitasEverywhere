@@ -17,7 +17,7 @@
     
     <ion-img style="width: 450px; height: 325px;" src={{product.pictureURI}}></ion-img>
     <h1 style="color:#000000;">{{product.name}}</h1>
-    <h4 style="color:#000000;">{{product.pricePerUnit}} </h4>
+    <h4 style="color:#000000;">${{product.pricePerUnit}} </h4>
     <h4 style="color:#000000;" *ngIf ="byQuantity; else pricePerPound">each </h4>
     
     <ng-template #pricePerPound>

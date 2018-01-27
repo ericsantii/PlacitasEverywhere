@@ -32,6 +32,12 @@ export class UserRepositoryProvider {
       });
   }
 
+  getUser(userID){
+    return this.http.get(this.url + '/id/' + userID)
+    .map((res) => res.json())
+  
+  }
+
 }
 
 

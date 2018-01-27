@@ -34,7 +34,7 @@
     <ion-item>
       <ion-label>Harvest Land</ion-label>
       <ion-select #harvestLandID>
-          <ion-option value="hL1">HarvestLand1</ion-option>
+          <ion-option *ngFor="let harvestLand of userHarvestLands" value = {{harvestLand.harvestLandID}}>{{harvestLand.name}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>

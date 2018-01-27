@@ -28,8 +28,4 @@ export class UserFactoryProvider {
     return this.user;
   }
 
-  
-
-
-  
 }

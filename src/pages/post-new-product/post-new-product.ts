@@ -4,6 +4,8 @@ import { Product } from '../../Models/Product';
 import { ProductFactoryProvider } from '../../providers/product-factory/product-factory';
 import { ProductRepositoryProvider } from '../../providers/product-repository/product-repository';
 import { query } from '@angular/core/src/animation/dsl';
+import { HarvestLandRepositoryProvider } from '../../providers/harvest-land-repository/harvest-land-repository';
+import { HarvestLandFactoryProvider } from '../../providers/harvest-land-factory/harvest-land-factory';
 
 
 /**
@@ -20,9 +22,22 @@ import { query } from '@angular/core/src/animation/dsl';
 })
 export class PostNewProductPage {
   product : Product;
+  userHarvestLands = []
   
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public productFactory: ProductFactoryProvider, public productRepository: ProductRepositoryProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public productFactory: ProductFactoryProvider, public productRepository: ProductRepositoryProvider, public harvestLandRepository :HarvestLandRepositoryProvider, public harvestLandFactory: HarvestLandFactoryProvider) {
+    this.harvestLandRepository.getHarvestLandsFromUser(localStorage.getItem('loggedInID')).toPromise().then(
+      res =>
+    { 
+      this.userHarvestLands = this.harvestLandFactory.createHarvestLandsFromJSON(res);
+      console.log('userharvestlands:',this.userHarvestLands)
+      
+    },
+  
+    err => {
+      console.log(err);
+    });
+    console.log(this.userHarvestLands);
   }
 
   ionViewDidLoad() {

@@ -22,6 +22,7 @@ export class ProductRepositoryProvider {
 
   postProduct(product:Product) {
     const headers = new Headers();
+    console.log(product);
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({ headers: headers });
     const req = this.http.post(this.url + '/api/products', JSON.stringify(product), options)

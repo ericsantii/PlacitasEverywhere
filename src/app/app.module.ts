@@ -17,7 +17,6 @@ import { HttpModule } from '@angular/http';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { SellerPage } from '../pages/seller/seller';
 import { HarvestPage } from '../pages/harvest/harvest';
 import { UserFactoryProvider } from '../providers/user-factory/user-factory';
 import { UserRepositoryProvider } from '../providers/user-repository/user-repository';
@@ -26,6 +25,10 @@ import { ProductRepositoryProvider } from '../providers/product-repository/produ
 import { AuthenticationServiceProvider } from '../providers/authentication-service/authentication-service';
 import { HarvestLandRepositoryProvider } from '../providers/harvest-land-repository/harvest-land-repository';
 import { HarvestLandFactoryProvider } from '../providers/harvest-land-factory/harvest-land-factory';
+import { ReviewFactoryProvider } from '../providers/review-factory/review-factory';
+import { ReviewRepositoryProvider } from '../providers/review-repository/review-repository';
+import { ReviewFormComponent } from '../components/review-form/review-form';
+
 
 
 @NgModule({
@@ -36,17 +39,17 @@ import { HarvestLandFactoryProvider } from '../providers/harvest-land-factory/ha
     PostNewProductPage,
     SearchPage,
     ProductPage,
-    SellerPage,
     CartPage,
     UserPage,
     SellingPointPage,
-    HarvestPage
+    HarvestPage,
+    ReviewFormComponent
     ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -56,7 +59,6 @@ import { HarvestLandFactoryProvider } from '../providers/harvest-land-factory/ha
     PostNewProductPage,
     SearchPage,
     ProductPage,
-    SellerPage,
     CartPage,
     UserPage,
     SellingPointPage,
@@ -72,7 +74,13 @@ import { HarvestLandFactoryProvider } from '../providers/harvest-land-factory/ha
     ProductRepositoryProvider,
     AuthenticationServiceProvider,
     HarvestLandRepositoryProvider,
-    HarvestLandFactoryProvider,  
-  ]
-})
+    HarvestLandFactoryProvider,
+    ReviewFactoryProvider,
+    ReviewRepositoryProvider
+  ],
+  exports: [
+    ReviewFormComponent
+  ],
+  }
+)
 export class AppModule {}
