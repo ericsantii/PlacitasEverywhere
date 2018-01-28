@@ -5,6 +5,7 @@ export interface Product{
 	pricingOption:string,
 	pricePerUnit:number,
 	productType:string,
-	sellerID:string
+	sellerID:string,
+	_id:string
 
 }

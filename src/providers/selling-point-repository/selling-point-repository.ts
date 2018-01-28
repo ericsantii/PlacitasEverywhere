@@ -39,5 +39,17 @@ export class SellingPointRepositoryProvider {
 
 
   }
+  deleteSellingPoint(sellingPoint){
+    console.log('deleting')
+    return this.http.delete(this.url + '/api/sellingPoints/' + sellingPoint._id)
+    .map((res) => res.json()).subscribe(
+      res=>{
+        console.log(res)
+      },
+      err=>{
+        console.log(err);
+      }
+    )
+  }
 
 }

@@ -7,7 +7,8 @@ export interface SellingPoint{
     sellerID:String,
     products:Product[],
     schedule:Schedule[],
-    pictureURI:String
+    pictureURI:String,
+    _id:string
 
 
 }

@@ -15,7 +15,7 @@ export class ProductFactoryProvider {
   constructor(public http: HttpClient) {
     console.log('Hello ProductFactoryProvider Provider');
   }
-  createProduct(name: string,pictureURI:string,harvestLandID:string,pricingOption:string,pricePerUnit:number, productType:string, sellerID:string){
+  createProduct(name: string,pictureURI:string,harvestLandID:string,pricingOption:string,pricePerUnit:number, productType:string, sellerID:string, id: string){
     this.product = {
       name: name,
       pictureURI:pictureURI,
@@ -23,13 +23,14 @@ export class ProductFactoryProvider {
       pricingOption:pricingOption,
       pricePerUnit:pricePerUnit,
       productType:productType,
-      sellerID:sellerID
+      sellerID:sellerID,
+      _id:id
   
     }
     return this.product;
   }
 
-  createProductFromDB(name: string,pictureURI:string,harvestLandID:string,pricingOption:string,pricePerUnit:number, productType:string, sellerID:string){
+  createProductFromDB(name: string,pictureURI:string,harvestLandID:string,pricingOption:string,pricePerUnit:number, productType:string, sellerID:string, id:string){
     this.product = {
       name: name,
       pictureURI:pictureURI,
@@ -37,7 +38,8 @@ export class ProductFactoryProvider {
       pricingOption:pricingOption,
       pricePerUnit:pricePerUnit,
       productType:productType,
-      sellerID:sellerID
+      sellerID:sellerID,
+      _id:id
   
     }
     return this.product;
@@ -47,7 +49,7 @@ export class ProductFactoryProvider {
   createProductsFromJSON(products){
     var arrayOfProducts:Product[] = [];
     for(var product of products){
-      arrayOfProducts.push(this.createProductFromDB(product.name, product.pictureURI,product.harvestLandID, product.pricingOption, product.pricePerUnit, product.productType, product.sellerID));
+      arrayOfProducts.push(this.createProductFromDB(product.name, product.pictureURI,product.harvestLandID, product.pricingOption, product.pricePerUnit, product.productType, product.sellerID, product._id));
 
     }
     return arrayOfProducts;

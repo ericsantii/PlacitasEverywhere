@@ -17,14 +17,15 @@ export class SellingPointFactoryProvider {
     console.log('Hello SellingPointFactoryProvider Provider');
   }
 
-createSellingPoint(name,location,sellerID,products,schedule,pictureURI){
+createSellingPoint(name,location,sellerID,products,schedule,pictureURI, id){
     this.sellingPoint = {
       name:name,
       location:location,
       sellerID:sellerID,
       products:products,
       schedule:schedule,
-      pictureURI:pictureURI
+      pictureURI:pictureURI,
+      _id: id
     }
     return this.sellingPoint;
 }
@@ -33,7 +34,7 @@ createSellingPointFromJSON(sellingPoints){
 
   var arrayOfSellingPoints:SellingPoint[] = [];
     for(var sellingPoint of sellingPoints){
-      arrayOfSellingPoints.push(this.createSellingPoint(sellingPoint.name, sellingPoint.location, sellingPoint.sellerID, sellingPoint.products, sellingPoint.schedule,sellingPoint.pictureURI));
+      arrayOfSellingPoints.push(this.createSellingPoint(sellingPoint.name, sellingPoint.location, sellingPoint.sellerID, sellingPoint.products, sellingPoint.schedule,sellingPoint.pictureURI, sellingPoint._id));
     }
     return arrayOfSellingPoints;
 

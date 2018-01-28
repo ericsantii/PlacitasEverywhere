@@ -45,7 +45,7 @@ export class PostNewProductPage {
   }
 
   postProduct(name, productType, pictureURI, harvestLandID, pricingOption, pricePerUnit) {
-    this.product = this.productFactory.createProduct(name, pictureURI, harvestLandID,pricingOption,pricePerUnit, productType, localStorage.getItem('loggedInID'));
+    this.product = this.productFactory.createProduct(name, pictureURI, harvestLandID,pricingOption,pricePerUnit, productType, localStorage.getItem('loggedInID'), null);
     this.productRepository.postProduct(this.product);
   }
 }

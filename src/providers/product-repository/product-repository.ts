@@ -44,5 +44,35 @@ export class ProductRepositoryProvider {
 
   }
 
+  getProductsFrom(userID){
+    return this.http.get(this.url + '/api/product/seller/' + userID)
+    .map((res) => res.json())
+  }
+
+  updateProduct(newProduct){
+    const headers = new Headers();
+    console.log(newProduct);
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({ headers: headers });
+    const req = this.http.put(this.url + '/api/product/id/' + newProduct._id, JSON.stringify(newProduct), options)
+    .map((res) => res.json())
+    .subscribe(
+      res => {
+        console.log(res);
+      },
+      err => {
+        console.log("Error Ocurred");
+      }
+    )
+  }
+
+  deleteProduct(product){
+    return this.http.delete(this.url + '/api/product/' + product._id)
+    .map((res) => res.json()).subscribe(
+      res=>{
+        console.log(res)
+      }
+    )
+  }
 
 }

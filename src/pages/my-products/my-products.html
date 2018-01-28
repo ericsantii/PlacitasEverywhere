@@ -1,0 +1,40 @@
+<!--
+  Generated template for the SearchPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>My Products</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<!-- <button ion-item *ngFor="let product of myproducts" (click)="openProductPage({product : product})">
+      ion-img style="width: 80px; height: 60px;" src={{product.pictureURI}}></ion-img>
+      {{product.name}} 
+      {{product.pricePerUnit}}
+  </button> -->
+
+<ion-content padding>
+
+  <ion-list>
+    <form *ngFor="let product of myproducts">
+      <ion-item>
+        <ion-img style="width: 80px; height: 60px;" src={{product.pictureURI}}></ion-img>
+      </ion-item>
+      <ion-item>
+        <ion-label>{{product.name}} </ion-label>
+        <ion-label>${{product.pricePerUnit}} </ion-label>
+        <ion-label>per {{product.pricingOption }} </ion-label>
+        
+
+      </ion-item>
+      <button ion-button (click)="updateProduct(product)">Update Info</button>
+      <button ion-button (click)="deleteProduct(product)">Delete product from my list</button>
+    </form>
+    </ion-list>
+</ion-content>

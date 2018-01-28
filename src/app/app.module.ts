@@ -35,6 +35,10 @@ import { ScheduleFactoryProvider } from '../providers/schedule-factory/schedule-
 import { CartItemFactoryProvider } from '../providers/cart-item-factory/cart-item-factory';
 import { CartItemRepositoryProvider } from '../providers/cart-item-repository/cart-item-repository';
 import { NewHarvestLandPage } from '../pages/new-harvest-land/new-harvest-land';
+import { MyProductsPage } from '../pages/my-products/my-products';
+import { UpdateProductPage } from '../pages/update-product/update-product';
+import { AssignProductsPage } from '../pages/assign-products/assign-products';
+import { MySellingPointsPage } from '../pages/my-selling-points/my-selling-points';
 
 
 
@@ -52,7 +56,11 @@ import { NewHarvestLandPage } from '../pages/new-harvest-land/new-harvest-land';
     HarvestPage,
     ReviewFormComponent,
     NewSellingPointPage,
-    NewHarvestLandPage
+    NewHarvestLandPage,
+    MyProductsPage,
+    UpdateProductPage,
+    AssignProductsPage,
+    MySellingPointsPage
     ],
   imports: [
     BrowserModule,
@@ -73,7 +81,11 @@ import { NewHarvestLandPage } from '../pages/new-harvest-land/new-harvest-land';
     SellingPointPage,
     HarvestPage,
     NewSellingPointPage,
-    NewHarvestLandPage
+    NewHarvestLandPage,
+    MyProductsPage,
+    UpdateProductPage,
+    AssignProductsPage,
+    MySellingPointsPage
     ],
   providers: [
     StatusBar,

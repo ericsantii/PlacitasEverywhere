@@ -1,0 +1,53 @@
+<!--
+  Generated template for the PostNewProductPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Update</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding="true" class="has-header">
+  <form (ngSubmit)="updateProduct(productName.value, productType.value, pictureURI.value, harvestLandID.value, pricingOption.value, pricePerUnit.value)">
+    <ion-item>
+      <ion-label>Product Name</ion-label>
+      <ion-input type="text" [(ngModel)]="product.name" name = "product_name" #productName></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Product Type</ion-label>
+      <ion-select [(ngModel)]="product.productType" name = "product_type" #productType>
+        <ion-option value="f">Fruit</ion-option>
+        <ion-option value="v">Vegetable</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Picture URI</ion-label>
+      <ion-input type="text" [(ngModel)]="product.pictureURI" name = "product_URI" #pictureURI required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Harvest Land</ion-label>
+      <ion-select [(ngModel)]="product.harvestLandID" name = "product_harvest" #harvestLandID>
+          <ion-option value="hL1">HarvestLand1</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Pricing Option</ion-label>
+      <ion-select [(ngModel)]="product.pricingOption" name = "product_pricing"#pricingOption>
+        <ion-option value="q">By Quantity</ion-option>
+        <ion-option value="p">By Pounds</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Price by Unit</ion-label>
+      <ion-input type="number" [(ngModel)]="product.pricePerUnit" name = "product_ppu" #pricePerUnit></ion-input>
+    </ion-item>
+    <button ion-button type="submit" block>Update Product</button>
+  </form>
+</ion-content>
