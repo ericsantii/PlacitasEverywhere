@@ -13,6 +13,7 @@ import { UserPage } from '../pages/user/user';
 import { SellingPointPage } from '../pages/selling-point/selling-point';
 import { HttpClientModule } from '@angular/common/http'; 
 import { HttpModule } from '@angular/http';
+import { NewSellingPointPage } from '../pages/post-new-selling-point/post-new-selling-point';
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -28,6 +29,9 @@ import { HarvestLandFactoryProvider } from '../providers/harvest-land-factory/ha
 import { ReviewFactoryProvider } from '../providers/review-factory/review-factory';
 import { ReviewRepositoryProvider } from '../providers/review-repository/review-repository';
 import { ReviewFormComponent } from '../components/review-form/review-form';
+import { SellingPointFactoryProvider } from '../providers/selling-point-factory/selling-point-factory';
+import { SellingPointRepositoryProvider } from '../providers/selling-point-repository/selling-point-repository';
+import { ScheduleFactoryProvider } from '../providers/schedule-factory/schedule-factory';
 
 
 
@@ -43,7 +47,8 @@ import { ReviewFormComponent } from '../components/review-form/review-form';
     UserPage,
     SellingPointPage,
     HarvestPage,
-    ReviewFormComponent
+    ReviewFormComponent,
+    NewSellingPointPage
     ],
   imports: [
     BrowserModule,
@@ -62,8 +67,9 @@ import { ReviewFormComponent } from '../components/review-form/review-form';
     CartPage,
     UserPage,
     SellingPointPage,
-    HarvestPage
-  ],
+    HarvestPage,
+    NewSellingPointPage
+    ],
   providers: [
     StatusBar,
     SplashScreen,
@@ -76,7 +82,10 @@ import { ReviewFormComponent } from '../components/review-form/review-form';
     HarvestLandRepositoryProvider,
     HarvestLandFactoryProvider,
     ReviewFactoryProvider,
-    ReviewRepositoryProvider
+    ReviewRepositoryProvider,
+    SellingPointFactoryProvider,
+    SellingPointRepositoryProvider,
+    ScheduleFactoryProvider
   ],
   exports: [
     ReviewFormComponent

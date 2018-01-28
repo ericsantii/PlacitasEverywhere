@@ -24,4 +24,11 @@ export class ReviewFactoryProvider {
     }
     return review
   }
+  createReviewsFromJSON(reviews: Review[]){
+    var arrayOfReviews:Review[] = [];
+    for(var review of reviews){
+      arrayOfReviews.push(this.createReview(review.title, review.rating, review.description,review.posterID, review.sellerID));
+    }
+    return arrayOfReviews;
+  }
 }

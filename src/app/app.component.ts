@@ -10,6 +10,7 @@ import { SearchPage } from '../pages/search/search';
 import { ProductPage } from '../pages/product/product';
 import { CartPage } from '../pages/cart/cart';
 import { SellingPointPage } from '../pages/selling-point/selling-point';
+import { NewSellingPointPage } from '../pages/post-new-selling-point/post-new-selling-point';
 
 
 
@@ -34,6 +35,7 @@ export class MyApp {
       { title: 'Sign In', component: SignInPage },
       { title: 'Post New Product', component: PostNewProductPage },
       { title: 'Search', component: SearchPage },
+      { title: 'Create New Selling Point', component: NewSellingPointPage },
       { title: 'Cart', component: CartPage }
 
       

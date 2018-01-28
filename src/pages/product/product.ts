@@ -62,11 +62,11 @@ export class ProductPage {
     //add to cart
   }
 
-  goToSeller(sellerID){
-    this.userRepository.getUser(this.product.sellerID).toPromise().then(
+  goToSeller(product){
+    
+    this.userRepository.getUser(product.sellerID).toPromise().then(
       res => {
         var seller = this.userFactory.createUser(res.firstName, res.lastName, res.userID,res.email,res.password,res.phone, res.pictureURI);
-        console.log('seller',seller);
         this.navCtrl.push(UserPage, {seller: seller});
       },
       err =>{

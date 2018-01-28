@@ -23,6 +23,6 @@
     <button ion-item *ngFor="let product of products" (click)="openProductPage({product : product})">
         <ion-img style="width: 80px; height: 60px;" src={{product.pictureURI}}></ion-img>
         {{product.name}} 
-        {{product.productPrice}}
+        {{product.pricePerUnit}}
     </button>
     </ion-content>

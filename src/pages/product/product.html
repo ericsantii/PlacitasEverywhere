@@ -23,13 +23,13 @@
     <ng-template #pricePerPound>
         <h4 style="color:#000000;">per Pound </h4>
     </ng-template>
-
-    <ion-item (click)="goToSeller({sellerID : 'Forzzark'})">
-        <ion-label>Seller: {{product.sellerID}}</ion-label>
-    </ion-item>
     <ion-item (click)="getHarvestInfo(product)">
         <ion-label>Harvest Land: {{product.harvestLandID}}</ion-label>
     </ion-item>
+    <button ion-item (click)="goToSeller(product)">
+        <ion-label>Seller: cfythdckjyfcuyckckhv{{product.sellerID}}</ion-label>
+    </button>
+    
     <form (ngSubmit)="addToCart(product)">
         <ion-item>
             <ion-label> Qty:</ion-label>

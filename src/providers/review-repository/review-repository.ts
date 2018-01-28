@@ -15,7 +15,7 @@ export class ReviewRepositoryProvider {
 
   constructor(public http: Http) {
     console.log('Hello ReviewRepositoryProvider Provider');
-    this.url = 'http://24.48.230.114:3005/';
+    this.url = 'http://24.48.230.114:3005';
   }
 
   postReview(review:Review){
@@ -33,5 +33,10 @@ export class ReviewRepositoryProvider {
         console.log(err);
       });
     
+  }
+  getReviewsFor(userID){
+    return this.http.get(this.url + '/api/reviews/seller/' + userID)
+    .map((res) => res.json())
+
   }
 }

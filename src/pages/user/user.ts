@@ -5,6 +5,9 @@ import { SellingPointPage } from '../selling-point/selling-point';
 import { HarvestLandRepositoryProvider } from '../../providers/harvest-land-repository/harvest-land-repository';
 import { HarvestLandFactoryProvider } from '../../providers/harvest-land-factory/harvest-land-factory';
 import { HarvestLand } from '../../Models/HarvestLand';
+import { Review } from '../../Models/Review';
+import { ReviewRepositoryProvider } from '../../providers/review-repository/review-repository';
+import { ReviewFactoryProvider } from '../../providers/review-factory/review-factory';
 
 
 /**
@@ -23,9 +26,9 @@ export class UserPage {
   user;
   harvestLands: HarvestLand[] = [];
   sellingPoints;
-  reviews;
+  reviews:Review[] = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public harvestLandRepository: HarvestLandRepositoryProvider, public harvestLandFactory:HarvestLandFactoryProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public harvestLandRepository: HarvestLandRepositoryProvider, public harvestLandFactory:HarvestLandFactoryProvider, public reviewsRepository: ReviewRepositoryProvider, public reviewsFactory: ReviewFactoryProvider) {
     //load seller info
     this.user = this.navParams.get('seller');
     //load harvest Lands
@@ -43,6 +46,16 @@ export class UserPage {
     //load selling points
       
     //load reviews
+
+    this.reviewsRepository.getReviewsFor(this.user.userID).toPromise().then(
+      res => {
+        this.reviews = this.reviewsFactory.createReviewsFromJSON(res);
+        console.log('thisreviews',this.reviews)
+      },
+      err =>{
+        console.log(err);
+      }
+    )
   }
 
   ionViewDidLoad() {

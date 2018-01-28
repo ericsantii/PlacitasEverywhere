@@ -14,7 +14,7 @@ export class UserRepositoryProvider {
   url;
   constructor(public http: Http) {
     console.log('Hello UserRepositoryProvider Provider');
-    this.url = 'http://localhost:3005/api/user';
+    this.url = 'http://24.48.230.114:3005/api/user';
   }
 
   saveNewUser(user:User){

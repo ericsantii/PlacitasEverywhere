@@ -1,0 +1,69 @@
+<!--
+  Generated template for the ProductPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Post New Selling Point</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding="true" class="has-header">
+  <form (ngSubmit)="createSchedule(day.value,openn.value,closee.value); postSellingPoint(sellingPointName.value,sellingPointLocation.value,pictureURI.value)"
+    name="newSellingPointForm">
+    <ion-item>
+      <ion-label>Selling Point Name</ion-label>
+      <ion-input type="text" #sellingPointName></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Selling Point Location</ion-label>
+      <ion-input type="location" #sellingPointLocation></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Opening Days</ion-label>
+      <ion-select [(ngModel)]="days" multiple="true" name="something" #day>
+        <ion-option value="L">Monday</ion-option>
+        <ion-option value="T">Tuesday</ion-option>
+        <ion-option value="M">Wednesay</ion-option>
+        <ion-option value="J">Thursday</ion-option>
+        <ion-option value="V">Friday</ion-option>
+        <ion-option value="S">Saturday</ion-option>
+        <ion-option value="D">Sunday</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>From</ion-label>
+      <ion-select [(ngModel)]="opening" name="something" #openn>
+        <ion-option value="8am">8:00am</ion-option>
+        <ion-option value="9am">9:00am</ion-option>
+        <ion-option value="10am">10:00am</ion-option>
+        <ion-option value="11am">11:00am</ion-option>
+        <ion-option value="12pm">12:00pm</ion-option>
+        <ion-option value="1pm">1:00pm</ion-option>
+        <ion-option value="2pm">2:00pm</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>To</ion-label>
+      <ion-select [(ngModel)]="closing" name="something" #closee>
+        <ion-option value="8am">8:00am</ion-option>
+        <ion-option value="9am">9:00am</ion-option>
+        <ion-option value="10am">10:00am</ion-option>
+        <ion-option value="11am">11:00am</ion-option>
+        <ion-option value="12pm">12:00pm</ion-option>
+        <ion-option value="1pm">1:00pm</ion-option>
+        <ion-option value="2pm">2:00pm</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Picture URI</ion-label>
+      <ion-input type="url" #pictureURI></ion-input>
+    </ion-item>
+    <button ion-button type="submit" block>Add Selling Point</button>
+  </form>
+</ion-content>
