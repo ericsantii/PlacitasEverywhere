@@ -21,15 +21,11 @@
 
 <ion-content padding>
 
-  <ion-list>
-    <form *ngFor="let product of myproducts">
-      <ion-item>
+  <ion-list *ngFor = "let product of myproducts; let i = index">
+      <ion-item >
         <ion-label> {{product.name}} </ion-label>
-        <ion-checkbox [(ngModel)]="products"[ngModelOptions]="{standalone: true}"></ion-checkbox>
+        <ion-checkbox (ionChange) = "updateSellingPointProducts($event, i)"></ion-checkbox>
       </ion-item>
-      <ion-item>
-      </ion-item>
-    </form>
   </ion-list>
-  <button ion-button (click)="updateSellingPoint(product)">Assign to Selling Point</button>
+  
 </ion-content>

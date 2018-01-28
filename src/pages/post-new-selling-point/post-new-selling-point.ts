@@ -35,7 +35,7 @@ export class NewSellingPointPage {
   }
   postSellingPoint(name, location, pictureURI) {
     this.sellingPoint = this.sellingPointFactory.createSellingPoint(name, location, localStorage.getItem('loggedInID'), {}, this.schedule, pictureURI, null);
-    
+    console.log(this.sellingPoint)
     this.sellingPointRepository.postSellingPoint(this.sellingPoint);
   }
 

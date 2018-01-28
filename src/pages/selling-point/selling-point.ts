@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ProductPage } from '../product/product';
 
 /**
  * Generated class for the SellingPointPage page.
@@ -25,4 +26,7 @@ export class SellingPointPage {
     console.log('ionViewDidLoad SellingPointPage');
   }
 
+  openProductPage(product){
+    this.navCtrl.push(ProductPage, product);
+  }
 }

@@ -7,6 +7,9 @@ webpackJsonp([15],{
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AssignProductsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_product_repository_product_repository__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_product_factory_product_factory__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_selling_point_repository_selling_point_repository__ = __webpack_require__(48);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,6 +21,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+
+
+
 /**
  * Generated class for the AssignProductsPage page.
  *
@@ -25,54 +31,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Ionic pages and navigation.
  */
 var AssignProductsPage = (function () {
-    function AssignProductsPage(navCtrl, navParams) {
+    function AssignProductsPage(navCtrl, navParams, productsRepository, productsFactory, sellingPointRepository) {
+        var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.myproducts = [
-            {
-                name: 'Aguacate',
-                pictureURI: 'https://www.organicfacts.net/wp-content/uploads/avocado.jpg',
-                harvestLandID: 'hL1',
-                pricingOption: 'p',
-                pricePerUnit: 4,
-                productType: 'v',
-                sellerID: 'fdgd',
-                _id: null
-            },
-            {
-                name: 'Guineo',
-                pictureURI: 'https://www.organicfacts.net/wp-content/uploads/2013/05/Banana3.jpg',
-                harvestLandID: 'hL1',
-                pricingOption: 'p',
-                pricePerUnit: 5,
-                productType: 'v',
-                sellerID: 'fdgd',
-                _id: null
-            },
-            {
-                name: 'Parcha',
-                pictureURI: 'https://qph.ec.quoracdn.net/main-qimg-fa2ddc3dd7569564b3f77eeca059e045-c',
-                harvestLandID: 'hL1',
-                pricingOption: 'q',
-                pricePerUnit: 4,
-                productType: 'v',
-                sellerID: 'fdgd',
-                _id: null
-            }
-        ];
+        this.productsRepository = productsRepository;
+        this.productsFactory = productsFactory;
+        this.sellingPointRepository = sellingPointRepository;
+        this.sellingP = this.navParams.get('sellingPoint');
+        productsRepository.getProductsFrom(localStorage.getItem('loggedInID')).toPromise().then(function (res) {
+            _this.myproducts = productsFactory.createProductsFromJSON(res);
+        }, function (err) {
+            console.log(err);
+        });
     }
     AssignProductsPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad AssignProductsPage');
     };
-    AssignProductsPage.prototype.updateSellingPoint = function (products) {
-        this.sellingP = this.navParams.get('sellingPoint');
-        this.sellingP.products = products; // assign array of products to selling point
+    AssignProductsPage.prototype.updateSellingPointProducts = function ($event, i) {
+        if (this.sellingP.products == undefined) {
+            this.sellingP.products = [];
+        }
+        if ($event.checked) {
+            this.sellingP.products.push(this.myproducts[i]);
+        }
+        this.sellingPointRepository.updateSellingPoint(this.sellingP);
     };
     AssignProductsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-assign-products',template:/*ion-inline-start:"d:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\assign-products\assign-products.html"*/'<!--\n  Generated template for the SearchPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Assign Products</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<!-- <button ion-item *ngFor="let product of myproducts" (click)="openProductPage({product : product})">\n      ion-img style="width: 80px; height: 60px;" src={{product.pictureURI}}></ion-img>\n      {{product.name}} \n      {{product.pricePerUnit}}\n  </button> -->\n\n<ion-content padding>\n\n  <ion-list>\n    <form *ngFor="let product of myproducts">\n      <ion-item>\n        <ion-label> {{product.name}} </ion-label>\n        <ion-checkbox [(ngModel)]="products"[ngModelOptions]="{standalone: true}"></ion-checkbox>\n      </ion-item>\n      <ion-item>\n      </ion-item>\n    </form>\n  </ion-list>\n  <button ion-button (click)="updateSellingPoint(product)">Assign to Selling Point</button>\n</ion-content>'/*ion-inline-end:"d:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\assign-products\assign-products.html"*/,
+            selector: 'page-assign-products',template:/*ion-inline-start:"d:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\assign-products\assign-products.html"*/'<!--\n  Generated template for the SearchPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Assign Products</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<!-- <button ion-item *ngFor="let product of myproducts" (click)="openProductPage({product : product})">\n      ion-img style="width: 80px; height: 60px;" src={{product.pictureURI}}></ion-img>\n      {{product.name}} \n      {{product.pricePerUnit}}\n  </button> -->\n\n<ion-content padding>\n\n  <ion-list *ngFor = "let product of myproducts; let i = index">\n      <ion-item >\n        <ion-label> {{product.name}} </ion-label>\n        <ion-checkbox (ionChange) = "updateSellingPointProducts($event, i)"></ion-checkbox>\n      </ion-item>\n  </ion-list>\n  \n</ion-content>'/*ion-inline-end:"d:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\assign-products\assign-products.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_product_repository_product_repository__["a" /* ProductRepositoryProvider */], __WEBPACK_IMPORTED_MODULE_3__providers_product_factory_product_factory__["a" /* ProductFactoryProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_selling_point_repository_selling_point_repository__["a" /* SellingPointRepositoryProvider */]])
     ], AssignProductsPage);
     return AssignProductsPage;
 }());
@@ -82,6 +71,127 @@ var AssignProductsPage = (function () {
 /***/ }),
 
 /***/ 117:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyProductsPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__update_product_update_product__ = __webpack_require__(118);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_product_repository_product_repository__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_product_factory_product_factory__ = __webpack_require__(36);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+/**
+ * Generated class for the MyProductsPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var MyProductsPage = (function () {
+    function MyProductsPage(navCtrl, navParams, productRepository, productFactory) {
+        var _this = this;
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.productRepository = productRepository;
+        this.productFactory = productFactory;
+        this.productRepository.getProductsFrom(localStorage.getItem('loggedInID')).toPromise().then(function (res) {
+            _this.myproducts = _this.productFactory.createProductsFromJSON(res);
+        }, function (err) {
+            console.log("Error Ocurred");
+        });
+    }
+    MyProductsPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad MyProductsPage');
+    };
+    MyProductsPage.prototype.updateProduct = function (product) {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__update_product_update_product__["a" /* UpdateProductPage */], { producto: product });
+    };
+    MyProductsPage.prototype.deleteProduct = function (product) {
+        this.productRepository.deleteProduct(product);
+    };
+    MyProductsPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-my-products',template:/*ion-inline-start:"d:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\my-products\my-products.html"*/'<!--\n  Generated template for the SearchPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>My Products</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<!-- <button ion-item *ngFor="let product of myproducts" (click)="openProductPage({product : product})">\n      ion-img style="width: 80px; height: 60px;" src={{product.pictureURI}}></ion-img>\n      {{product.name}} \n      {{product.pricePerUnit}}\n  </button> -->\n\n<ion-content padding>\n\n  <ion-list>\n    <form *ngFor="let product of myproducts">\n      <ion-item>\n        <ion-img style="width: 80px; height: 60px;" src={{product.pictureURI}}></ion-img>\n      </ion-item>\n      <ion-item>\n        <ion-label>{{product.name}} </ion-label>\n        <ion-label>${{product.pricePerUnit}} </ion-label>\n        <ion-label>per {{product.pricingOption }} </ion-label>\n        \n\n      </ion-item>\n      <button ion-button (click)="updateProduct(product)">Update Info</button>\n      <button ion-button (click)="deleteProduct(product)">Delete product from my list</button>\n    </form>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"d:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\my-products\my-products.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__providers_product_repository_product_repository__["a" /* ProductRepositoryProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_product_factory_product_factory__["a" /* ProductFactoryProvider */]])
+    ], MyProductsPage);
+    return MyProductsPage;
+}());
+
+//# sourceMappingURL=my-products.js.map
+
+/***/ }),
+
+/***/ 118:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UpdateProductPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_product_factory_product_factory__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_product_repository_product_repository__ = __webpack_require__(35);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+/**
+ * Generated class for the UpdateProductPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var UpdateProductPage = (function () {
+    function UpdateProductPage(navCtrl, navParams, productFactory, productRepository) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.productFactory = productFactory;
+        this.productRepository = productRepository;
+        this.product = this.navParams.get('producto');
+    }
+    UpdateProductPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad UpdateProductPage');
+    };
+    UpdateProductPage.prototype.updateProduct = function (name, type, pictureURI, harvestLand, pricingOption, pricePerUnit) {
+        var newProduct = this.productFactory.createProduct(name, pictureURI, harvestLand, pricingOption, pricePerUnit, type, localStorage.getItem('loggedInID'), this.product._id);
+        this.productRepository.updateProduct(newProduct);
+    };
+    UpdateProductPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-update-product',template:/*ion-inline-start:"d:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\update-product\update-product.html"*/'<!--\n  Generated template for the PostNewProductPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Update</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding="true" class="has-header">\n  <form (ngSubmit)="updateProduct(productName.value, productType.value, pictureURI.value, harvestLandID.value, pricingOption.value, pricePerUnit.value)">\n    <ion-item>\n      <ion-label>Product Name</ion-label>\n      <ion-input type="text" [(ngModel)]="product.name" name = "product_name" #productName></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Product Type</ion-label>\n      <ion-select [(ngModel)]="product.productType" name = "product_type" #productType>\n        <ion-option value="f">Fruit</ion-option>\n        <ion-option value="v">Vegetable</ion-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>Picture URI</ion-label>\n      <ion-input type="text" [(ngModel)]="product.pictureURI" name = "product_URI" #pictureURI required></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Harvest Land</ion-label>\n      <ion-select [(ngModel)]="product.harvestLandID" name = "product_harvest" #harvestLandID>\n          <ion-option value="hL1">HarvestLand1</ion-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>Pricing Option</ion-label>\n      <ion-select [(ngModel)]="product.pricingOption" name = "product_pricing"#pricingOption>\n        <ion-option value="q">By Quantity</ion-option>\n        <ion-option value="p">By Pounds</ion-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>Price by Unit</ion-label>\n      <ion-input type="number" [(ngModel)]="product.pricePerUnit" name = "product_ppu" #pricePerUnit></ion-input>\n    </ion-item>\n    <button ion-button type="submit" block>Update Product</button>\n  </form>\n</ion-content>'/*ion-inline-end:"d:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\update-product\update-product.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_product_factory_product_factory__["a" /* ProductFactoryProvider */], __WEBPACK_IMPORTED_MODULE_3__providers_product_repository_product_repository__["a" /* ProductRepositoryProvider */]])
+    ], UpdateProductPage);
+    return UpdateProductPage;
+}());
+
+//# sourceMappingURL=update-product.js.map
+
+/***/ }),
+
+/***/ 119:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -145,127 +255,6 @@ var CartPage = (function () {
 
 /***/ }),
 
-/***/ 118:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyProductsPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__update_product_update_product__ = __webpack_require__(119);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_product_repository_product_repository__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_product_factory_product_factory__ = __webpack_require__(45);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-/**
- * Generated class for the MyProductsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var MyProductsPage = (function () {
-    function MyProductsPage(navCtrl, navParams, productRepository, productFactory) {
-        var _this = this;
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.productRepository = productRepository;
-        this.productFactory = productFactory;
-        this.productRepository.getProductsFrom(localStorage.getItem('loggedInID')).toPromise().then(function (res) {
-            _this.myproducts = _this.productFactory.createProductsFromJSON(res);
-        }, function (err) {
-            console.log("Error Ocurred");
-        });
-    }
-    MyProductsPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad MyProductsPage');
-    };
-    MyProductsPage.prototype.updateProduct = function (product) {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__update_product_update_product__["a" /* UpdateProductPage */], { producto: product });
-    };
-    MyProductsPage.prototype.deleteProduct = function (product) {
-        this.productRepository.deleteProduct(product);
-    };
-    MyProductsPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-my-products',template:/*ion-inline-start:"d:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\my-products\my-products.html"*/'<!--\n  Generated template for the SearchPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>My Products</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<!-- <button ion-item *ngFor="let product of myproducts" (click)="openProductPage({product : product})">\n      ion-img style="width: 80px; height: 60px;" src={{product.pictureURI}}></ion-img>\n      {{product.name}} \n      {{product.pricePerUnit}}\n  </button> -->\n\n<ion-content padding>\n\n  <ion-list>\n    <form *ngFor="let product of myproducts">\n      <ion-item>\n        <ion-img style="width: 80px; height: 60px;" src={{product.pictureURI}}></ion-img>\n      </ion-item>\n      <ion-item>\n        <ion-label>{{product.name}} </ion-label>\n        <ion-label>${{product.pricePerUnit}} </ion-label>\n        <ion-label>per {{product.pricingOption }} </ion-label>\n        \n\n      </ion-item>\n      <button ion-button (click)="updateProduct(product)">Update Info</button>\n      <button ion-button (click)="deleteProduct(product)">Delete product from my list</button>\n    </form>\n    </ion-list>\n</ion-content>'/*ion-inline-end:"d:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\my-products\my-products.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_3__providers_product_repository_product_repository__["a" /* ProductRepositoryProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_product_factory_product_factory__["a" /* ProductFactoryProvider */]])
-    ], MyProductsPage);
-    return MyProductsPage;
-}());
-
-//# sourceMappingURL=my-products.js.map
-
-/***/ }),
-
-/***/ 119:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UpdateProductPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_product_factory_product_factory__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_product_repository_product_repository__ = __webpack_require__(46);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-/**
- * Generated class for the UpdateProductPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var UpdateProductPage = (function () {
-    function UpdateProductPage(navCtrl, navParams, productFactory, productRepository) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.productFactory = productFactory;
-        this.productRepository = productRepository;
-        this.product = this.navParams.get('producto');
-    }
-    UpdateProductPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad UpdateProductPage');
-    };
-    UpdateProductPage.prototype.updateProduct = function (name, type, pictureURI, harvestLand, pricingOption, pricePerUnit) {
-        var newProduct = this.productFactory.createProduct(name, pictureURI, harvestLand, pricingOption, pricePerUnit, type, localStorage.getItem('loggedInID'), this.product._id);
-        this.productRepository.updateProduct(newProduct);
-    };
-    UpdateProductPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-update-product',template:/*ion-inline-start:"d:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\update-product\update-product.html"*/'<!--\n  Generated template for the PostNewProductPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Update</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding="true" class="has-header">\n  <form (ngSubmit)="updateProduct(productName.value, productType.value, pictureURI.value, harvestLandID.value, pricingOption.value, pricePerUnit.value)">\n    <ion-item>\n      <ion-label>Product Name</ion-label>\n      <ion-input type="text" [(ngModel)]="product.name" name = "product_name" #productName></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Product Type</ion-label>\n      <ion-select [(ngModel)]="product.productType" name = "product_type" #productType>\n        <ion-option value="f">Fruit</ion-option>\n        <ion-option value="v">Vegetable</ion-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>Picture URI</ion-label>\n      <ion-input type="text" [(ngModel)]="product.pictureURI" name = "product_URI" #pictureURI required></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Harvest Land</ion-label>\n      <ion-select [(ngModel)]="product.harvestLandID" name = "product_harvest" #harvestLandID>\n          <ion-option value="hL1">HarvestLand1</ion-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>Pricing Option</ion-label>\n      <ion-select [(ngModel)]="product.pricingOption" name = "product_pricing"#pricingOption>\n        <ion-option value="q">By Quantity</ion-option>\n        <ion-option value="p">By Pounds</ion-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>Price by Unit</ion-label>\n      <ion-input type="number" [(ngModel)]="product.pricePerUnit" name = "product_ppu" #pricePerUnit></ion-input>\n    </ion-item>\n    <button ion-button type="submit" block>Update Product</button>\n  </form>\n</ion-content>'/*ion-inline-end:"d:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\update-product\update-product.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_product_factory_product_factory__["a" /* ProductFactoryProvider */], __WEBPACK_IMPORTED_MODULE_3__providers_product_repository_product_repository__["a" /* ProductRepositoryProvider */]])
-    ], UpdateProductPage);
-    return UpdateProductPage;
-}());
-
-//# sourceMappingURL=update-product.js.map
-
-/***/ }),
-
 /***/ 120:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -274,7 +263,7 @@ var UpdateProductPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__assign_products_assign_products__ = __webpack_require__(116);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_selling_point_repository_selling_point_repository__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_selling_point_repository_selling_point_repository__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_selling_point_factory_selling_point_factory__ = __webpack_require__(54);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -333,128 +322,12 @@ var MySellingPointsPage = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewHarvestLandPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_harvest_land_repository_harvest_land_repository__ = __webpack_require__(35);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_harvest_land_factory_harvest_land_factory__ = __webpack_require__(32);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-/**
- * Generated class for the NewHarvestLandPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var NewHarvestLandPage = (function () {
-    function NewHarvestLandPage(navCtrl, navParams, harvestLandRepository, harvestLandFactory) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.harvestLandRepository = harvestLandRepository;
-        this.harvestLandFactory = harvestLandFactory;
-    }
-    NewHarvestLandPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad NewHarvestLandPage');
-    };
-    NewHarvestLandPage.prototype.createHarvestLand = function (name, location, pictureURI, id) {
-        var harvestLand = this.harvestLandFactory.createHarvestLand({ name: name, location: location, pictureURI: pictureURI, harvestLandID: id, sellerID: localStorage.getItem('loggedInID') });
-        this.harvestLandRepository.addHarvestLand(harvestLand);
-    };
-    NewHarvestLandPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-new-harvest-land',template:/*ion-inline-start:"d:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\new-harvest-land\new-harvest-land.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Post New Harvest Land</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding="true" class="has-header">\n  <form (ngSubmit)="createHarvestLand(name.value, location.value, pictureURI.value, id.value)" name="newHarvestLandForm">\n    <ion-item>\n      <ion-label>Harvest Land Name</ion-label>\n      <ion-input type="text" #name></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Harvest Land Location</ion-label>\n      <ion-input type="text" #location></ion-input>\n    </ion-item>\n    <ion-item>\n\n\n      <ion-label>Harvest Land Picture</ion-label>\n      <ion-input type="text" #pictureURI></ion-input>\n\n\n    </ion-item>\n    <ion-item>\n        <ion-label>Harvest Land ID</ion-label>\n        <ion-input type="text" #id></ion-input>\n    </ion-item>\n    \n    <button ion-button type="submit" block>Add Harvest Land</button>\n  </form>\n</ion-content>'/*ion-inline-end:"d:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\new-harvest-land\new-harvest-land.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_harvest_land_repository_harvest_land_repository__["a" /* HarvestLandRepositoryProvider */], __WEBPACK_IMPORTED_MODULE_3__providers_harvest_land_factory_harvest_land_factory__["a" /* HarvestLandFactoryProvider */]])
-    ], NewHarvestLandPage);
-    return NewHarvestLandPage;
-}());
-
-//# sourceMappingURL=new-harvest-land.js.map
-
-/***/ }),
-
-/***/ 122:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewSellingPointPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_selling_point_factory_selling_point_factory__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_selling_point_repository_selling_point_repository__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_schedule_factory_schedule_factory__ = __webpack_require__(184);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-/*
- * Generated class for the SellingPointPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var NewSellingPointPage = (function () {
-    function NewSellingPointPage(navCtrl, navParams, sellingPointFactory, sellingPointRepository, scheduleFactory) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.sellingPointFactory = sellingPointFactory;
-        this.sellingPointRepository = sellingPointRepository;
-        this.scheduleFactory = scheduleFactory;
-    }
-    NewSellingPointPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad SellingPointPage');
-    };
-    NewSellingPointPage.prototype.createSchedule = function (day, openh, closeh) {
-        this.schedule = this.scheduleFactory.createSchedule(day, openh, closeh);
-    };
-    NewSellingPointPage.prototype.postSellingPoint = function (name, location, pictureURI) {
-        this.sellingPoint = this.sellingPointFactory.createSellingPoint(name, location, localStorage.getItem('loggedInID'), {}, this.schedule, pictureURI, null);
-        this.sellingPointRepository.postSellingPoint(this.sellingPoint);
-    };
-    NewSellingPointPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-selling-point',template:/*ion-inline-start:"d:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\post-new-selling-point\post-new-selling-point.html"*/'<!--\n  Generated template for the ProductPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Post New Selling Point</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding="true" class="has-header">\n  <form (ngSubmit)="createSchedule(day.value,openn.value,closee.value); postSellingPoint(sellingPointName.value,sellingPointLocation.value,pictureURI.value)"\n    name="newSellingPointForm">\n    <ion-item>\n      <ion-label>Selling Point Name</ion-label>\n      <ion-input type="text" #sellingPointName></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Selling Point Location</ion-label>\n      <ion-input type="location" #sellingPointLocation></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Opening Days</ion-label>\n      <ion-select [(ngModel)]="days" multiple="true" name="something" #day>\n        <ion-option value="L">Monday</ion-option>\n        <ion-option value="T">Tuesday</ion-option>\n        <ion-option value="M">Wednesay</ion-option>\n        <ion-option value="J">Thursday</ion-option>\n        <ion-option value="V">Friday</ion-option>\n        <ion-option value="S">Saturday</ion-option>\n        <ion-option value="D">Sunday</ion-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>From</ion-label>\n      <ion-select [(ngModel)]="opening" name="something" #openn>\n        <ion-option value="8am">8:00am</ion-option>\n        <ion-option value="9am">9:00am</ion-option>\n        <ion-option value="10am">10:00am</ion-option>\n        <ion-option value="11am">11:00am</ion-option>\n        <ion-option value="12pm">12:00pm</ion-option>\n        <ion-option value="1pm">1:00pm</ion-option>\n        <ion-option value="2pm">2:00pm</ion-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>To</ion-label>\n      <ion-select [(ngModel)]="closing" name="something" #closee>\n        <ion-option value="8am">8:00am</ion-option>\n        <ion-option value="9am">9:00am</ion-option>\n        <ion-option value="10am">10:00am</ion-option>\n        <ion-option value="11am">11:00am</ion-option>\n        <ion-option value="12pm">12:00pm</ion-option>\n        <ion-option value="1pm">1:00pm</ion-option>\n        <ion-option value="2pm">2:00pm</ion-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>Picture URI</ion-label>\n      <ion-input type="url" #pictureURI></ion-input>\n    </ion-item>\n    <button ion-button type="submit" block>Add Selling Point</button>\n  </form>\n</ion-content>'/*ion-inline-end:"d:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\post-new-selling-point\post-new-selling-point.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_selling_point_factory_selling_point_factory__["a" /* SellingPointFactoryProvider */], __WEBPACK_IMPORTED_MODULE_3__providers_selling_point_repository_selling_point_repository__["a" /* SellingPointRepositoryProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_schedule_factory_schedule_factory__["a" /* ScheduleFactoryProvider */]])
-    ], NewSellingPointPage);
-    return NewSellingPointPage;
-}());
-
-//# sourceMappingURL=post-new-selling-point.js.map
-
-/***/ }),
-
-/***/ 123:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PostNewProductPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_product_factory_product_factory__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_product_repository_product_repository__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_harvest_land_repository_harvest_land_repository__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_product_factory_product_factory__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_product_repository_product_repository__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_harvest_land_repository_harvest_land_repository__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_harvest_land_factory_harvest_land_factory__ = __webpack_require__(32);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -515,6 +388,123 @@ var PostNewProductPage = (function () {
 
 /***/ }),
 
+/***/ 122:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewHarvestLandPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_harvest_land_repository_harvest_land_repository__ = __webpack_require__(37);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_harvest_land_factory_harvest_land_factory__ = __webpack_require__(32);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+/**
+ * Generated class for the NewHarvestLandPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var NewHarvestLandPage = (function () {
+    function NewHarvestLandPage(navCtrl, navParams, harvestLandRepository, harvestLandFactory) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.harvestLandRepository = harvestLandRepository;
+        this.harvestLandFactory = harvestLandFactory;
+    }
+    NewHarvestLandPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad NewHarvestLandPage');
+    };
+    NewHarvestLandPage.prototype.createHarvestLand = function (name, location, pictureURI, id) {
+        var harvestLand = this.harvestLandFactory.createHarvestLand({ name: name, location: location, pictureURI: pictureURI, harvestLandID: id, sellerID: localStorage.getItem('loggedInID') });
+        this.harvestLandRepository.addHarvestLand(harvestLand);
+    };
+    NewHarvestLandPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-new-harvest-land',template:/*ion-inline-start:"d:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\new-harvest-land\new-harvest-land.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Post New Harvest Land</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding="true" class="has-header">\n  <form (ngSubmit)="createHarvestLand(name.value, location.value, pictureURI.value, id.value)" name="newHarvestLandForm">\n    <ion-item>\n      <ion-label>Harvest Land Name</ion-label>\n      <ion-input type="text" #name></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Harvest Land Location</ion-label>\n      <ion-input type="text" #location></ion-input>\n    </ion-item>\n    <ion-item>\n\n\n      <ion-label>Harvest Land Picture</ion-label>\n      <ion-input type="text" #pictureURI></ion-input>\n\n\n    </ion-item>\n    <ion-item>\n        <ion-label>Harvest Land ID</ion-label>\n        <ion-input type="text" #id></ion-input>\n    </ion-item>\n    \n    <button ion-button type="submit" block>Add Harvest Land</button>\n  </form>\n</ion-content>'/*ion-inline-end:"d:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\new-harvest-land\new-harvest-land.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_harvest_land_repository_harvest_land_repository__["a" /* HarvestLandRepositoryProvider */], __WEBPACK_IMPORTED_MODULE_3__providers_harvest_land_factory_harvest_land_factory__["a" /* HarvestLandFactoryProvider */]])
+    ], NewHarvestLandPage);
+    return NewHarvestLandPage;
+}());
+
+//# sourceMappingURL=new-harvest-land.js.map
+
+/***/ }),
+
+/***/ 123:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewSellingPointPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_selling_point_factory_selling_point_factory__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_selling_point_repository_selling_point_repository__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_schedule_factory_schedule_factory__ = __webpack_require__(184);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+/*
+ * Generated class for the SellingPointPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var NewSellingPointPage = (function () {
+    function NewSellingPointPage(navCtrl, navParams, sellingPointFactory, sellingPointRepository, scheduleFactory) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.sellingPointFactory = sellingPointFactory;
+        this.sellingPointRepository = sellingPointRepository;
+        this.scheduleFactory = scheduleFactory;
+    }
+    NewSellingPointPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad SellingPointPage');
+    };
+    NewSellingPointPage.prototype.createSchedule = function (day, openh, closeh) {
+        this.schedule = this.scheduleFactory.createSchedule(day, openh, closeh);
+    };
+    NewSellingPointPage.prototype.postSellingPoint = function (name, location, pictureURI) {
+        this.sellingPoint = this.sellingPointFactory.createSellingPoint(name, location, localStorage.getItem('loggedInID'), {}, this.schedule, pictureURI, null);
+        console.log(this.sellingPoint);
+        this.sellingPointRepository.postSellingPoint(this.sellingPoint);
+    };
+    NewSellingPointPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-selling-point',template:/*ion-inline-start:"d:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\post-new-selling-point\post-new-selling-point.html"*/'<!--\n  Generated template for the ProductPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Post New Selling Point</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding="true" class="has-header">\n  <form (ngSubmit)="createSchedule(day.value,openn.value,closee.value); postSellingPoint(sellingPointName.value,sellingPointLocation.value,pictureURI.value)"\n    name="newSellingPointForm">\n    <ion-item>\n      <ion-label>Selling Point Name</ion-label>\n      <ion-input type="text" #sellingPointName></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Selling Point Location</ion-label>\n      <ion-input type="location" #sellingPointLocation></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Opening Days</ion-label>\n      <ion-select [(ngModel)]="days" multiple="true" name="something" #day>\n        <ion-option value="L">Monday</ion-option>\n        <ion-option value="T">Tuesday</ion-option>\n        <ion-option value="M">Wednesay</ion-option>\n        <ion-option value="J">Thursday</ion-option>\n        <ion-option value="V">Friday</ion-option>\n        <ion-option value="S">Saturday</ion-option>\n        <ion-option value="D">Sunday</ion-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>From</ion-label>\n      <ion-select [(ngModel)]="opening" name="something" #openn>\n        <ion-option value="8am">8:00am</ion-option>\n        <ion-option value="9am">9:00am</ion-option>\n        <ion-option value="10am">10:00am</ion-option>\n        <ion-option value="11am">11:00am</ion-option>\n        <ion-option value="12pm">12:00pm</ion-option>\n        <ion-option value="1pm">1:00pm</ion-option>\n        <ion-option value="2pm">2:00pm</ion-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>To</ion-label>\n      <ion-select [(ngModel)]="closing" name="something" #closee>\n        <ion-option value="8am">8:00am</ion-option>\n        <ion-option value="9am">9:00am</ion-option>\n        <ion-option value="10am">10:00am</ion-option>\n        <ion-option value="11am">11:00am</ion-option>\n        <ion-option value="12pm">12:00pm</ion-option>\n        <ion-option value="1pm">1:00pm</ion-option>\n        <ion-option value="2pm">2:00pm</ion-option>\n      </ion-select>\n    </ion-item>\n    <ion-item>\n      <ion-label>Picture URI</ion-label>\n      <ion-input type="url" #pictureURI></ion-input>\n    </ion-item>\n    <button ion-button type="submit" block>Add Selling Point</button>\n  </form>\n</ion-content>'/*ion-inline-end:"d:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\post-new-selling-point\post-new-selling-point.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_selling_point_factory_selling_point_factory__["a" /* SellingPointFactoryProvider */], __WEBPACK_IMPORTED_MODULE_3__providers_selling_point_repository_selling_point_repository__["a" /* SellingPointRepositoryProvider */], __WEBPACK_IMPORTED_MODULE_4__providers_schedule_factory_schedule_factory__["a" /* ScheduleFactoryProvider */]])
+    ], NewSellingPointPage);
+    return NewSellingPointPage;
+}());
+
+//# sourceMappingURL=post-new-selling-point.js.map
+
+/***/ }),
+
 /***/ 124:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -524,7 +514,7 @@ var PostNewProductPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__user_user__ = __webpack_require__(125);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__harvest_harvest__ = __webpack_require__(60);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_harvest_land_repository_harvest_land_repository__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_harvest_land_repository_harvest_land_repository__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_harvest_land_factory_harvest_land_factory__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_user_repository_user_repository__ = __webpack_require__(93);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_user_factory_user_factory__ = __webpack_require__(55);
@@ -622,11 +612,11 @@ var ProductPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__harvest_harvest__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__selling_point_selling_point__ = __webpack_require__(126);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_harvest_land_repository_harvest_land_repository__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_harvest_land_repository_harvest_land_repository__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_harvest_land_factory_harvest_land_factory__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__providers_review_repository_review_repository__ = __webpack_require__(91);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__providers_review_factory_review_factory__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_selling_point_repository_selling_point_repository__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__providers_selling_point_repository_selling_point_repository__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__providers_selling_point_factory_selling_point_factory__ = __webpack_require__(54);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -721,6 +711,7 @@ var UserPage = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SellingPointPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__product_product__ = __webpack_require__(124);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -730,6 +721,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 /**
@@ -747,13 +739,17 @@ var SellingPointPage = (function () {
     SellingPointPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad SellingPointPage');
     };
+    SellingPointPage.prototype.openProductPage = function (product) {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__product_product__["a" /* ProductPage */], product);
+    };
     SellingPointPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-selling-point',template:/*ion-inline-start:"d:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\selling-point\selling-point.html"*/'<!--\n  Generated template for the ProductPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n    <ion-navbar>\n      <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n      <ion-title>{{sellingPoint.name}}</ion-title>\n    </ion-navbar>\n  </ion-header>\n\n<ion-content padding>\n    \n    <ion-img style="width: 200px; height: 100px;" src={{sellingPoint.pictureURI}}></ion-img>\n    <h1 style="color:#000000;">{{sellingPoint.name}}</h1>\n    <h4 style="color:#000000;">Location: {{sellingPoint.location}}</h4>\n    \n    \n</ion-content>\n'/*ion-inline-end:"d:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\selling-point\selling-point.html"*/,
+            selector: 'page-selling-point',template:/*ion-inline-start:"d:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\selling-point\selling-point.html"*/'<!--\n  Generated template for the ProductPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n    <ion-navbar>\n      <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n      <ion-title>{{sellingPoint.name}}</ion-title>\n    </ion-navbar>\n  </ion-header>\n\n<ion-content padding>\n    \n    <ion-img style="width: 200px; height: 100px;" src={{sellingPoint.pictureURI}}></ion-img>\n    <h1 style="color:#000000;">{{sellingPoint.name}}</h1>\n    <h4 style="color:#000000;">Location: {{sellingPoint.location}}</h4>\n    <h4 style="color:#000000;">Products:</h4>\n    <button ion-item *ngFor="let product of this.sellingPoint.products" (click)="openProductPage({product : product})">\n        <ion-img style="width: 80px; height: 60px;" src={{product.pictureURI}}></ion-img>\n        {{product.name}} \n        {{product.pricePerUnit}}\n    </button>\n</ion-content>\n'/*ion-inline-end:"d:\Fernando Documents\Documents\GitHub\PlacitasEverywhere-Client\src\pages\selling-point\selling-point.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object])
     ], SellingPointPage);
     return SellingPointPage;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=selling-point.js.map
@@ -768,8 +764,8 @@ var SellingPointPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__product_product__ = __webpack_require__(124);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_product_repository_product_repository__ = __webpack_require__(46);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_product_factory_product_factory__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_product_repository_product_repository__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_product_factory_product_factory__ = __webpack_require__(36);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -975,15 +971,15 @@ var map = {
 		14
 	],
 	"../pages/cart/cart.module": [
-		309,
+		311,
 		13
 	],
 	"../pages/harvest/harvest.module": [
-		311,
+		310,
 		12
 	],
 	"../pages/my-products/my-products.module": [
-		310,
+		309,
 		11
 	],
 	"../pages/my-selling-points/my-selling-points.module": [
@@ -991,15 +987,15 @@ var map = {
 		10
 	],
 	"../pages/new-harvest-land/new-harvest-land.module": [
-		313,
+		314,
 		9
 	],
 	"../pages/post-new-product/post-new-product.module": [
-		315,
+		313,
 		8
 	],
 	"../pages/post-new-selling-point/post-new-selling-point.module": [
-		314,
+		315,
 		7
 	],
 	"../pages/product/product.module": [
@@ -1015,7 +1011,7 @@ var map = {
 		4
 	],
 	"../pages/sign-in/sign-in.module": [
-		320,
+		319,
 		3
 	],
 	"../pages/sign-up/sign-up.module": [
@@ -1023,7 +1019,7 @@ var map = {
 		2
 	],
 	"../pages/update-product/update-product.module": [
-		319,
+		320,
 		1
 	],
 	"../pages/user/user.module": [
@@ -1183,36 +1179,36 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(298);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_sign_in_sign_in__ = __webpack_require__(128);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_sign_up_sign_up__ = __webpack_require__(129);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_post_new_product_post_new_product__ = __webpack_require__(123);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_post_new_product_post_new_product__ = __webpack_require__(121);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_search_search__ = __webpack_require__(127);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_product_product__ = __webpack_require__(124);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_cart_cart__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_cart_cart__ = __webpack_require__(119);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_user_user__ = __webpack_require__(125);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_selling_point_selling_point__ = __webpack_require__(126);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__angular_common_http__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__angular_http__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_post_new_selling_point_post_new_selling_point__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_post_new_selling_point_post_new_selling_point__ = __webpack_require__(123);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__ionic_native_status_bar__ = __webpack_require__(225);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ionic_native_splash_screen__ = __webpack_require__(228);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_harvest_harvest__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__providers_user_factory_user_factory__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__providers_user_repository_user_repository__ = __webpack_require__(93);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__providers_product_factory_product_factory__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__providers_product_repository_product_repository__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__providers_product_factory_product_factory__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__providers_product_repository_product_repository__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__providers_authentication_service_authentication_service__ = __webpack_require__(185);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__providers_harvest_land_repository_harvest_land_repository__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__providers_harvest_land_repository_harvest_land_repository__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__providers_harvest_land_factory_harvest_land_factory__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__providers_review_factory_review_factory__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__providers_review_repository_review_repository__ = __webpack_require__(91);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_review_form_review_form__ = __webpack_require__(307);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__providers_selling_point_factory_selling_point_factory__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__providers_selling_point_repository_selling_point_repository__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__providers_selling_point_repository_selling_point_repository__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__providers_schedule_factory_schedule_factory__ = __webpack_require__(184);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__providers_cart_item_factory_cart_item_factory__ = __webpack_require__(89);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__providers_cart_item_repository_cart_item_repository__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__pages_new_harvest_land_new_harvest_land__ = __webpack_require__(121);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__pages_my_products_my_products__ = __webpack_require__(118);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__pages_update_product_update_product__ = __webpack_require__(119);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_33__pages_new_harvest_land_new_harvest_land__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_34__pages_my_products_my_products__ = __webpack_require__(117);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_35__pages_update_product_update_product__ = __webpack_require__(118);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_36__pages_assign_products_assign_products__ = __webpack_require__(116);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_37__pages_my_selling_points_my_selling_points__ = __webpack_require__(120);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1288,18 +1284,18 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */], {}, {
                     links: [
                         { loadChildren: '../pages/assign-products/assign-products.module#AssignProductsPageModule', name: 'AssignProductsPage', segment: 'assign-products', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/cart/cart.module#CartPageModule', name: 'CartPage', segment: 'cart', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/my-products/my-products.module#MyProductsPageModule', name: 'MyProductsPage', segment: 'my-products', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/harvest/harvest.module#HarvestPageModule', name: 'HarvestPage', segment: 'harvest', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/cart/cart.module#CartPageModule', name: 'CartPage', segment: 'cart', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/my-selling-points/my-selling-points.module#MySellingPointsPageModule', name: 'MySellingPointsPage', segment: 'my-selling-points', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/post-new-product/post-new-product.module#PostNewProductPageModule', name: 'PostNewProductPage', segment: 'post-new-product', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/new-harvest-land/new-harvest-land.module#NewHarvestLandPageModule', name: 'NewHarvestLandPage', segment: 'new-harvest-land', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/post-new-selling-point/post-new-selling-point.module#SellingPointPageModule', name: 'NewSellingPointPage', segment: 'post-new-selling-point', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/post-new-product/post-new-product.module#PostNewProductPageModule', name: 'PostNewProductPage', segment: 'post-new-product', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/product/product.module#ProductPageModule', name: 'ProductPage', segment: 'product', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/search/search.module#SearchPageModule', name: 'SearchPage', segment: 'search', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/selling-point/selling-point.module#SellingPointPageModule', name: 'SellingPointPage', segment: 'selling-point', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/update-product/update-product.module#UpdateProductPageModule', name: 'UpdateProductPage', segment: 'update-product', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/sign-in/sign-in.module#SignInPageModule', name: 'SignInPage', segment: 'sign-in', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/update-product/update-product.module#UpdateProductPageModule', name: 'UpdateProductPage', segment: 'update-product', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/sign-up/sign-up.module#SignUpPageModule', name: 'SignUpPage', segment: 'sign-up', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/user/user.module#UserPageModule', name: 'UserPage', segment: 'user', priority: 'low', defaultHistory: [] }
                     ]
@@ -1367,12 +1363,12 @@ var AppModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(225);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(228);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_sign_in_sign_in__ = __webpack_require__(128);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_post_new_product_post_new_product__ = __webpack_require__(123);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_post_new_product_post_new_product__ = __webpack_require__(121);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_search_search__ = __webpack_require__(127);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_cart_cart__ = __webpack_require__(117);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_post_new_selling_point_post_new_selling_point__ = __webpack_require__(122);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_new_harvest_land_new_harvest_land__ = __webpack_require__(121);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_my_products_my_products__ = __webpack_require__(118);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_cart_cart__ = __webpack_require__(119);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_post_new_selling_point_post_new_selling_point__ = __webpack_require__(123);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_new_harvest_land_new_harvest_land__ = __webpack_require__(122);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_my_products_my_products__ = __webpack_require__(117);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_my_selling_points_my_selling_points__ = __webpack_require__(120);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1560,147 +1556,6 @@ var HarvestLandFactoryProvider = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HarvestLandRepositoryProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(47);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__harvest_land_factory_harvest_land_factory__ = __webpack_require__(32);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-/*
-  Generated class for the HarvestLandRepositoryProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
-var HarvestLandRepositoryProvider = (function () {
-    function HarvestLandRepositoryProvider(http, harvestLandFactory) {
-        this.http = http;
-        this.harvestLandFactory = harvestLandFactory;
-        this.url = 'http://24.48.230.114:3005';
-        console.log('Hello HarvestLandRepositoryProvider Provider');
-    }
-    HarvestLandRepositoryProvider.prototype.getHarvestLand = function (harvestLandID) {
-        return this.http.get(this.url + '/api/harvestLand/id/' + harvestLandID)
-            .map(function (res) { return res.json(); });
-    };
-    HarvestLandRepositoryProvider.prototype.getHarvestLandsFromUser = function (userID) {
-        return this.http.get(this.url + '/api/harvestLands/seller/' + userID)
-            .map(function (res) { return res.json(); });
-    };
-    HarvestLandRepositoryProvider.prototype.addHarvestLand = function (harvestLand) {
-        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
-        headers.append('Content-Type', 'application/json');
-        var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* RequestOptions */]({ headers: headers });
-        var req = this.http.post(this.url + '/api/harvestLands', JSON.stringify(harvestLand), options)
-            .map(function (res) { return res.json(); })
-            .subscribe(function (res) {
-            console.log(res);
-        }, function (err) {
-            console.log("Error");
-        });
-    };
-    HarvestLandRepositoryProvider = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_3__harvest_land_factory_harvest_land_factory__["a" /* HarvestLandFactoryProvider */]])
-    ], HarvestLandRepositoryProvider);
-    return HarvestLandRepositoryProvider;
-}());
-
-//# sourceMappingURL=harvest-land-repository.js.map
-
-/***/ }),
-
-/***/ 45:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProductFactoryProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-/*
-  Generated class for the ProductFactoryProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
-var ProductFactoryProvider = (function () {
-    function ProductFactoryProvider(http) {
-        this.http = http;
-        console.log('Hello ProductFactoryProvider Provider');
-    }
-    ProductFactoryProvider.prototype.createProduct = function (name, pictureURI, harvestLandID, pricingOption, pricePerUnit, productType, sellerID, id) {
-        this.product = {
-            name: name,
-            pictureURI: pictureURI,
-            harvestLandID: harvestLandID,
-            pricingOption: pricingOption,
-            pricePerUnit: pricePerUnit,
-            productType: productType,
-            sellerID: sellerID,
-            _id: id
-        };
-        return this.product;
-    };
-    ProductFactoryProvider.prototype.createProductFromDB = function (name, pictureURI, harvestLandID, pricingOption, pricePerUnit, productType, sellerID, id) {
-        this.product = {
-            name: name,
-            pictureURI: pictureURI,
-            harvestLandID: harvestLandID,
-            pricingOption: pricingOption,
-            pricePerUnit: pricePerUnit,
-            productType: productType,
-            sellerID: sellerID,
-            _id: id
-        };
-        return this.product;
-    };
-    ProductFactoryProvider.prototype.createProductsFromJSON = function (products) {
-        var arrayOfProducts = [];
-        for (var _i = 0, products_1 = products; _i < products_1.length; _i++) {
-            var product = products_1[_i];
-            arrayOfProducts.push(this.createProductFromDB(product.name, product.pictureURI, product.harvestLandID, product.pricingOption, product.pricePerUnit, product.productType, product.sellerID, product._id));
-        }
-        return arrayOfProducts;
-    };
-    ProductFactoryProvider = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]])
-    ], ProductFactoryProvider);
-    return ProductFactoryProvider;
-}());
-
-//# sourceMappingURL=product-factory.js.map
-
-/***/ }),
-
-/***/ 46:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProductRepositoryProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(27);
@@ -1781,7 +1636,148 @@ var ProductRepositoryProvider = (function () {
 
 /***/ }),
 
-/***/ 53:
+/***/ 36:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProductFactoryProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+/*
+  Generated class for the ProductFactoryProvider provider.
+
+  See https://angular.io/guide/dependency-injection for more info on providers
+  and Angular DI.
+*/
+var ProductFactoryProvider = (function () {
+    function ProductFactoryProvider(http) {
+        this.http = http;
+        console.log('Hello ProductFactoryProvider Provider');
+    }
+    ProductFactoryProvider.prototype.createProduct = function (name, pictureURI, harvestLandID, pricingOption, pricePerUnit, productType, sellerID, id) {
+        this.product = {
+            name: name,
+            pictureURI: pictureURI,
+            harvestLandID: harvestLandID,
+            pricingOption: pricingOption,
+            pricePerUnit: pricePerUnit,
+            productType: productType,
+            sellerID: sellerID,
+            _id: id
+        };
+        return this.product;
+    };
+    ProductFactoryProvider.prototype.createProductFromDB = function (name, pictureURI, harvestLandID, pricingOption, pricePerUnit, productType, sellerID, id) {
+        this.product = {
+            name: name,
+            pictureURI: pictureURI,
+            harvestLandID: harvestLandID,
+            pricingOption: pricingOption,
+            pricePerUnit: pricePerUnit,
+            productType: productType,
+            sellerID: sellerID,
+            _id: id
+        };
+        return this.product;
+    };
+    ProductFactoryProvider.prototype.createProductsFromJSON = function (products) {
+        var arrayOfProducts = [];
+        for (var _i = 0, products_1 = products; _i < products_1.length; _i++) {
+            var product = products_1[_i];
+            arrayOfProducts.push(this.createProductFromDB(product.name, product.pictureURI, product.harvestLandID, product.pricingOption, product.pricePerUnit, product.productType, product.sellerID, product._id));
+        }
+        return arrayOfProducts;
+    };
+    ProductFactoryProvider = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]])
+    ], ProductFactoryProvider);
+    return ProductFactoryProvider;
+}());
+
+//# sourceMappingURL=product-factory.js.map
+
+/***/ }),
+
+/***/ 37:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HarvestLandRepositoryProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__harvest_land_factory_harvest_land_factory__ = __webpack_require__(32);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+/*
+  Generated class for the HarvestLandRepositoryProvider provider.
+
+  See https://angular.io/guide/dependency-injection for more info on providers
+  and Angular DI.
+*/
+var HarvestLandRepositoryProvider = (function () {
+    function HarvestLandRepositoryProvider(http, harvestLandFactory) {
+        this.http = http;
+        this.harvestLandFactory = harvestLandFactory;
+        this.url = 'http://24.48.230.114:3005';
+        console.log('Hello HarvestLandRepositoryProvider Provider');
+    }
+    HarvestLandRepositoryProvider.prototype.getHarvestLand = function (harvestLandID) {
+        return this.http.get(this.url + '/api/harvestLand/id/' + harvestLandID)
+            .map(function (res) { return res.json(); });
+    };
+    HarvestLandRepositoryProvider.prototype.getHarvestLandsFromUser = function (userID) {
+        return this.http.get(this.url + '/api/harvestLands/seller/' + userID)
+            .map(function (res) { return res.json(); });
+    };
+    HarvestLandRepositoryProvider.prototype.addHarvestLand = function (harvestLand) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
+        headers.append('Content-Type', 'application/json');
+        var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* RequestOptions */]({ headers: headers });
+        var req = this.http.post(this.url + '/api/harvestLands', JSON.stringify(harvestLand), options)
+            .map(function (res) { return res.json(); })
+            .subscribe(function (res) {
+            console.log(res);
+        }, function (err) {
+            console.log("Error");
+        });
+    };
+    HarvestLandRepositoryProvider = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_3__harvest_land_factory_harvest_land_factory__["a" /* HarvestLandFactoryProvider */]])
+    ], HarvestLandRepositoryProvider);
+    return HarvestLandRepositoryProvider;
+}());
+
+//# sourceMappingURL=harvest-land-repository.js.map
+
+/***/ }),
+
+/***/ 48:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1816,15 +1812,16 @@ var SellingPointRepositoryProvider = (function () {
         this.url = 'http://24.48.230.114:3005';
     }
     SellingPointRepositoryProvider.prototype.postSellingPoint = function (sellingPoint) {
+        console.log('fromrepo', JSON.stringify(sellingPoint));
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
         headers.append('Content-Type', 'application/json');
         var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* RequestOptions */]({ headers: headers });
-        var req = this.http.post(this.url + 'sellingPoints', JSON.stringify(sellingPoint), options)
+        var req = this.http.post(this.url + '/api/sellingPoints', JSON.stringify(sellingPoint), options)
             .map(function (res) { return res.json(); })
             .subscribe(function (res) {
             console.log(res);
         }, function (err) {
-            console.log("Error");
+            console.log(err);
         });
     };
     SellingPointRepositoryProvider.prototype.getSellingPointsFromUser = function (userID) {
@@ -1833,7 +1830,18 @@ var SellingPointRepositoryProvider = (function () {
     };
     SellingPointRepositoryProvider.prototype.deleteSellingPoint = function (sellingPoint) {
         console.log('deleting');
-        return this.http.delete(this.url + '/api/sellingPoints/' + sellingPoint._id)
+        return this.http.delete(this.url + '/api/sellingPoint/' + sellingPoint._id)
+            .map(function (res) { return res.json(); }).subscribe(function (res) {
+            console.log(res);
+        }, function (err) {
+            console.log(err);
+        });
+    };
+    SellingPointRepositoryProvider.prototype.updateSellingPoint = function (sellingP) {
+        var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]();
+        headers.append('Content-Type', 'application/json');
+        var options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["d" /* RequestOptions */]({ headers: headers });
+        return this.http.put(this.url + '/api/sellingPoint/' + sellingP._id, JSON.stringify(sellingP), options)
             .map(function (res) { return res.json(); }).subscribe(function (res) {
             console.log(res);
         }, function (err) {
@@ -1842,10 +1850,9 @@ var SellingPointRepositoryProvider = (function () {
     };
     SellingPointRepositoryProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
     ], SellingPointRepositoryProvider);
     return SellingPointRepositoryProvider;
-    var _a;
 }());
 
 //# sourceMappingURL=selling-point-repository.js.map
@@ -1967,7 +1974,7 @@ var UserFactoryProvider = (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HarvestPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_harvest_land_repository_harvest_land_repository__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_harvest_land_repository_harvest_land_repository__ = __webpack_require__(37);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_harvest_land_factory_harvest_land_factory__ = __webpack_require__(32);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;

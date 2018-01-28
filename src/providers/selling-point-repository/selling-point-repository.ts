@@ -18,17 +18,18 @@ export class SellingPointRepositoryProvider {
     this.url = 'http://24.48.230.114:3005'
   }
   postSellingPoint(sellingPoint: SellingPoint) {
+    console.log('fromrepo', JSON.stringify(sellingPoint))
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({ headers: headers });
-    const req = this.http.post(this.url + 'sellingPoints', JSON.stringify(sellingPoint), options)
+    const req = this.http.post(this.url + '/api/sellingPoints', JSON.stringify(sellingPoint), options)
       .map((res) => res.json())
       .subscribe(
       res => {
         console.log(res);
       },
       err => {
-        console.log("Error");
+        console.log(err);
       });
 
   }
@@ -41,7 +42,22 @@ export class SellingPointRepositoryProvider {
   }
   deleteSellingPoint(sellingPoint){
     console.log('deleting')
-    return this.http.delete(this.url + '/api/sellingPoints/' + sellingPoint._id)
+    return this.http.delete(this.url + '/api/sellingPoint/' + sellingPoint._id)
+    .map((res) => res.json()).subscribe(
+      res=>{
+        console.log(res)
+      },
+      err=>{
+        console.log(err);
+      }
+    )
+  }
+
+  updateSellingPoint(sellingP){
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({ headers: headers });
+    return this.http.put(this.url + '/api/sellingPoint/' + sellingP._id, JSON.stringify(sellingP), options)
     .map((res) => res.json()).subscribe(
       res=>{
         console.log(res)

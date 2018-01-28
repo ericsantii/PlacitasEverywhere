@@ -18,6 +18,10 @@
     <ion-img style="width: 200px; height: 100px;" src={{sellingPoint.pictureURI}}></ion-img>
     <h1 style="color:#000000;">{{sellingPoint.name}}</h1>
     <h4 style="color:#000000;">Location: {{sellingPoint.location}}</h4>
-    
-    
+    <h4 style="color:#000000;">Products:</h4>
+    <button ion-item *ngFor="let product of this.sellingPoint.products" (click)="openProductPage({product : product})">
+        <ion-img style="width: 80px; height: 60px;" src={{product.pictureURI}}></ion-img>
+        {{product.name}} 
+        {{product.pricePerUnit}}
+    </button>
 </ion-content>
