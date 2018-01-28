@@ -12,18 +12,18 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class SellingPointRepositoryProvider {
-url:string;
+  url: string;
   constructor(public http: Http) {
     console.log('Hello SellingPointRepositoryProvider Provider');
-    this.url = 'http://24.48.230.114:3005/api/'
+    this.url = 'http://24.48.230.114:3005'
   }
-postSellingPoint(sellingPoint:SellingPoint){
-  const headers = new Headers();
+  postSellingPoint(sellingPoint: SellingPoint) {
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({ headers: headers });
-    const req= this.http.post(this.url + 'sellingPoints' , JSON.stringify(sellingPoint), options)
-    .map((res)=>res.json())
-    .subscribe(
+    const req = this.http.post(this.url + 'sellingPoints', JSON.stringify(sellingPoint), options)
+      .map((res) => res.json())
+      .subscribe(
       res => {
         console.log(res);
       },
@@ -31,5 +31,13 @@ postSellingPoint(sellingPoint:SellingPoint){
         console.log("Error");
       });
 
-}
+  }
+
+  getSellingPointsFromUser(userID){
+    return this.http.get(this.url + '/api/sellingPoints/seller/' + userID)
+    .map((res) => res.json())
+
+
+  }
+
 }

@@ -32,6 +32,9 @@ import { ReviewFormComponent } from '../components/review-form/review-form';
 import { SellingPointFactoryProvider } from '../providers/selling-point-factory/selling-point-factory';
 import { SellingPointRepositoryProvider } from '../providers/selling-point-repository/selling-point-repository';
 import { ScheduleFactoryProvider } from '../providers/schedule-factory/schedule-factory';
+import { CartItemFactoryProvider } from '../providers/cart-item-factory/cart-item-factory';
+import { CartItemRepositoryProvider } from '../providers/cart-item-repository/cart-item-repository';
+import { NewHarvestLandPage } from '../pages/new-harvest-land/new-harvest-land';
 
 
 
@@ -48,7 +51,8 @@ import { ScheduleFactoryProvider } from '../providers/schedule-factory/schedule-
     SellingPointPage,
     HarvestPage,
     ReviewFormComponent,
-    NewSellingPointPage
+    NewSellingPointPage,
+    NewHarvestLandPage
     ],
   imports: [
     BrowserModule,
@@ -68,7 +72,8 @@ import { ScheduleFactoryProvider } from '../providers/schedule-factory/schedule-
     UserPage,
     SellingPointPage,
     HarvestPage,
-    NewSellingPointPage
+    NewSellingPointPage,
+    NewHarvestLandPage
     ],
   providers: [
     StatusBar,
@@ -85,7 +90,9 @@ import { ScheduleFactoryProvider } from '../providers/schedule-factory/schedule-
     ReviewRepositoryProvider,
     SellingPointFactoryProvider,
     SellingPointRepositoryProvider,
-    ScheduleFactoryProvider
+    ScheduleFactoryProvider,
+    CartItemFactoryProvider,
+    CartItemRepositoryProvider
   ],
   exports: [
     ReviewFormComponent

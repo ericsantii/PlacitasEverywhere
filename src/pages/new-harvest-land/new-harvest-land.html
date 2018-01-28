@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Post New Harvest Land</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding="true" class="has-header">
+  <form (ngSubmit)="createHarvestLand(name.value, location.value, pictureURI.value, id.value)" name="newHarvestLandForm">
+    <ion-item>
+      <ion-label>Harvest Land Name</ion-label>
+      <ion-input type="text" #name></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Harvest Land Location</ion-label>
+      <ion-input type="text" #location></ion-input>
+    </ion-item>
+    <ion-item>
+
+
+      <ion-label>Harvest Land Picture</ion-label>
+      <ion-input type="text" #pictureURI></ion-input>
+
+
+    </ion-item>
+    <ion-item>
+        <ion-label>Harvest Land ID</ion-label>
+        <ion-input type="text" #id></ion-input>
+    </ion-item>
+    
+    <button ion-button type="submit" block>Add Harvest Land</button>
+  </form>
+</ion-content>

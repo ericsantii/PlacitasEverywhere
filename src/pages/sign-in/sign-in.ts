@@ -23,6 +23,8 @@ export class SignInPage {
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public authService:AuthenticationServiceProvider) {
+    this.userID = localStorage.getItem('loggedInID');
+    
   }
 
   ionViewDidLoad() {
@@ -36,9 +38,12 @@ export class SignInPage {
   }
   signIn(userID, password){
       this.authService.authenticateUser(userID,password);
-      
     
-
   }
-  
+  notSignedIn(){
+    return localStorage.getItem('loggedInID') == null;
+  }
+  signOut(){
+    localStorage.clear();
+  }
 }

@@ -19,22 +19,22 @@
     <ion-list>
         <form *ngFor="let cartItem of cartItems">
             <ion-item>
-                <ion-img style="width: 80px; height: 60px;" src={{cartItem.pictureURI}}></ion-img>
+                <ion-img style="width: 80px; height: 60px;" src={{cartItem.product.pictureURI}}></ion-img>
               </ion-item>
               <ion-item>
-                  <ion-label>{{cartItem.productName}} </ion-label>
+                  <ion-label>{{cartItem.product.name}} </ion-label>
                   
               </ion-item>
               <ion-item>
-                  <ion-label>{{cartItem.price}}</ion-label>
+                  <ion-label>{{cartItem.product.pricePerUnit}}</ion-label>
                   
               </ion-item>
               <ion-item>
                   <ion-label>Quantity: </ion-label>
-                  <ion-input [(ngModel)]="quantity" name="quantity" type="number" placeholder="{{cartItem.numOfItems}}"></ion-input>
+                  <ion-input #quantity name="quantity" type="number" placeholder="{{cartItem.numOfItems}}"></ion-input>
               </ion-item>
-            <button ion-button (click)="updateQuantity(item)">Update Quantity</button>
-            <button ion-button (click)="deleteItem(item)">Delete Item from Cart</button>
+            <button ion-button (click)="updateQuantity(cartItem, quantity.value)">Update Quantity</button>
+            <button ion-button (click)="deleteItem(cartItem)">Delete Item from Cart</button>
         </form>
       
       </ion-list>

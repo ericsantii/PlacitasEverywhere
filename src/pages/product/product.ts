@@ -8,6 +8,8 @@ import { HarvestLandFactoryProvider } from '../../providers/harvest-land-factory
 import { HarvestLand } from '../../Models/HarvestLand';
 import { UserRepositoryProvider } from '../../providers/user-repository/user-repository';
 import { UserFactoryProvider } from '../../providers/user-factory/user-factory';
+import { CartItemFactoryProvider } from '../../providers/cart-item-factory/cart-item-factory';
+import { CartItemRepositoryProvider } from '../../providers/cart-item-repository/cart-item-repository';
 
 /**
  * Generated class for the ProductPage page.
@@ -27,7 +29,7 @@ export class ProductPage {
   quantity: number;
   byQuantity: boolean = false;
   byWeight: boolean = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public harvestLandRepository:HarvestLandRepositoryProvider, public harvestLandFactory:HarvestLandFactoryProvider, public userRepository: UserRepositoryProvider, public userFactory: UserFactoryProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public harvestLandRepository:HarvestLandRepositoryProvider, public harvestLandFactory:HarvestLandFactoryProvider, public userRepository: UserRepositoryProvider, public userFactory: UserFactoryProvider, public cartItemFactory: CartItemFactoryProvider, public cartItemRepository:CartItemRepositoryProvider) {
     
     this.product = this.navParams.get('product');
     if(this.product.pricingOption == 'q'){
@@ -58,8 +60,11 @@ export class ProductPage {
     
   }
 
-  addToCart(product){
-    //add to cart
+  addToCart(quantity){
+    var cartItem = this.cartItemFactory.createCartItem(this.product, quantity, localStorage.getItem('loggedInID'));
+    this.cartItemRepository.addProductToCart(cartItem);
+
+
   }
 
   goToSeller(product){

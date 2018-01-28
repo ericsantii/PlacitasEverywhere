@@ -11,6 +11,7 @@ import { ProductPage } from '../pages/product/product';
 import { CartPage } from '../pages/cart/cart';
 import { SellingPointPage } from '../pages/selling-point/selling-point';
 import { NewSellingPointPage } from '../pages/post-new-selling-point/post-new-selling-point';
+import { NewHarvestLandPage } from '../pages/new-harvest-land/new-harvest-land';
 
 
 
@@ -36,6 +37,7 @@ export class MyApp {
       { title: 'Post New Product', component: PostNewProductPage },
       { title: 'Search', component: SearchPage },
       { title: 'Create New Selling Point', component: NewSellingPointPage },
+      { title: 'New Harvest Land', component: NewHarvestLandPage },
       { title: 'Cart', component: CartPage }
 
       

@@ -23,7 +23,7 @@ export class ReviewRepositoryProvider {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({ headers: headers });
-    const req = this.http.post(this.url + 'api/reviews' , JSON.stringify(review), options)
+    const req = this.http.post(this.url + '/api/reviews' , JSON.stringify(review), options)
     .map((res)=> res.json())
     .subscribe(
       res => {

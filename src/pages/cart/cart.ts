@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { CartItem } from '../../Models/CartItem';
+import { CartItemFactoryProvider } from '../../providers/cart-item-factory/cart-item-factory';
+import { CartItemRepositoryProvider } from '../../providers/cart-item-repository/cart-item-repository';
 
 /**
  * Generated class for the CartPage page.
@@ -16,65 +19,37 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class CartPage {
 
 
-  cartItems;
+  cartItems:CartItem[] = [];
   
 
   
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.cartItems = [
-
-      {
-        productName : 'Aguacate',
-        price : '$100.00',
-        pictureURI: 'https://www.organicfacts.net/wp-content/uploads/avocado.jpg',
-        pricingOption : 'q',
-        harvestLandID : '543453',
-        sellerID: 'Pepito',
-        productID: 'product1',
-        numOfItems : 2
+  constructor(public navCtrl: NavController, public navParams: NavParams, public cartItemFactory: CartItemFactoryProvider, public cartItemRepository:CartItemRepositoryProvider) {
+    
+    cartItemRepository.getCartItemsByUserID(localStorage.getItem('loggedInID')).toPromise().then(
+      res => {
+        this.cartItems = cartItemFactory.createCartItemFromJSON(res)
       },
-      {
-        productName : 'Guineo',
-        price : '$50.00',
-        pictureURI: 'https://www.organicfacts.net/wp-content/uploads/2013/05/Banana3.jpg',
-        pricingOption : 'q',
-        harvestLandID : '453453',
-        sellerID: 'Pepito',
-        productID: 'product2',
-        numOfItems : 2
-      },
-      {
-        productName : 'Parcha',
-        price : '$75.00',
-        pictureURI: 'https://qph.ec.quoracdn.net/main-qimg-fa2ddc3dd7569564b3f77eeca059e045-c',
-        pricingOption : 'q',
-        harvestLandID : '453453',
-        sellerID: 'Pepito',
-        productID: 'product3',
-        numOfItems : 2
-      },
-      {
-        productName : 'China',
-        price : '$25.00',
-        pictureURI : 'https://www.oasis-botanical.ca/wp-content/uploads/2017/02/orange-web.jpg',
-        pricingOption : 'p',
-        harvestLandID : '453453',
-        sellerID: 'Pepitoo',
-        productID: 'product4',
-        numOfItems : 2
+      err =>{
+        console.log(err);
       }
-    ];
-
+    )
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CartPage');
   }
 
-  deleteItemFromCart()
-  {
+  updateQuantity(item, quantity){
+    
+    this.cartItemRepository.updateQuantity(item, quantity);
+
+    
+  }
+  deleteItem(cartItem){
+    this.cartItemRepository.deleteCartItem(cartItem);
 
   }
+  
 
 }

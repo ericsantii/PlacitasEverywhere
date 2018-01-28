@@ -27,13 +27,13 @@
         <ion-label>Harvest Land: {{product.harvestLandID}}</ion-label>
     </ion-item>
     <button ion-item (click)="goToSeller(product)">
-        <ion-label>Seller: cfythdckjyfcuyckckhv{{product.sellerID}}</ion-label>
+        <ion-label>Seller: {{product.sellerID}}</ion-label>
     </button>
     
-    <form (ngSubmit)="addToCart(product)">
+    <form (ngSubmit)="addToCart(quantity.value)">
         <ion-item>
             <ion-label> Qty:</ion-label>
-            <ion-input [(ngModel)]="quantity" name="quantity" type="number"></ion-input>
+            <ion-input #quantity name="quantity" type="number"></ion-input>
         </ion-item>
       <button ion-button type="submit" block>Add to Cart</button>
     </form>

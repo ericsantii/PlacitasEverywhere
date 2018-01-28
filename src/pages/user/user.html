@@ -24,18 +24,22 @@
     <h3 style="color:#000000;">Harvest Lands</h3>
 
     <ion-list>
-        <ion-item *ngFor="let harvestLand of harvestLands" (click)="getHarvestInfo(harvestLand)">
-            <ion-label>{{harvestLand.name}}</ion-label>>
-        </ion-item>
+        <button ion-item *ngFor="let harvestLand of harvestLands" (click)="getHarvestInfo(harvestLand)">
+            <ion-img style="width: 80px; height: 60px;" src={{harvestLand.pictureURI}}></ion-img>
+            {{harvestLand.name}}
+            {{harvestLand.location}}
+        </button>
 
     </ion-list>
 
     <h3 style="color:#000000;">Selling Points</h3>
-    <ion-list>
-        <ion-item *ngFor="let sellingPoint of sellingPoints" (click)="goToSellingPoint(sellingPoint)">
-            <ion-label>{{sellingPoint.name}}</ion-label>>
-        </ion-item>
 
+    <ion-list>
+        <button ion-item *ngFor="let sellingpoint of sellingPoints" (click)="goToSellingPoint(sellingpoint)">
+            <ion-img style="width: 80px; height: 60px;" src={{sellingpoint.pictureURI}}></ion-img>
+            {{sellingpoint.name}} 
+            {{sellingpoint.location}}
+        </button>
     </ion-list>
     <ion-list>
         <h3 style="color:#000000;">Reviews</h3>
@@ -43,7 +47,7 @@
     <ion-item *ngFor="let review of reviews">
         <b>{{review.title}}...............{{review.rating}} stars</b>
         <p>{{review.description}}</p>
-       
+
     </ion-item>
-    <review-form *ngIf = "allowReview()"></review-form>
+    <review-form *ngIf="allowReview()" [parentsUser]="this"></review-form>
 </ion-content>

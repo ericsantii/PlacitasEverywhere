@@ -29,4 +29,14 @@ createSellingPoint(name,location,sellerID,products,schedule,pictureURI){
     return this.sellingPoint;
 }
 
+createSellingPointFromJSON(sellingPoints){
+
+  var arrayOfSellingPoints:SellingPoint[] = [];
+    for(var sellingPoint of sellingPoints){
+      arrayOfSellingPoints.push(this.createSellingPoint(sellingPoint.name, sellingPoint.location, sellingPoint.sellerID, sellingPoint.products, sellingPoint.schedule,sellingPoint.pictureURI));
+    }
+    return arrayOfSellingPoints;
+
+}
+
 }

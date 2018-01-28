@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { HarvestLandFactoryProvider } from '../harvest-land-factory/harvest-land-factory';
+import { HarvestLand } from '../../Models/HarvestLand';
 
 /*
   Generated class for the HarvestLandRepositoryProvider provider.
@@ -30,4 +31,20 @@ export class HarvestLandRepositoryProvider {
     .map((res) => res.json())
   
   }
+
+  addHarvestLand(harvestLand:HarvestLand){
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({ headers: headers });
+    const req= this.http.post(this.url + '/api/harvestLands', JSON.stringify(harvestLand), options)
+    .map((res)=>res.json())
+    .subscribe(
+      res => {
+        console.log(res);
+      },
+      err => {
+        console.log("Error");
+      });
+  }
+
 }

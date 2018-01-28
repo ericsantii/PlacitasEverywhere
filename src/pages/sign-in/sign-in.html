@@ -1,4 +1,4 @@
-  <ion-header>
+<ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
@@ -7,8 +7,9 @@
   </ion-navbar>
 </ion-header>
 
-  
-  <ion-content padding="true" class="has-header">
+
+<ion-content padding="true" class="has-header">
+  <div *ngIf = "notSignedIn(); else showsignedinuser">
     <h1 style="color:#000000;text-align:center;">Sign In</h1>
     <form (ngSubmit)="signIn(userID.value, password.value)">
       <ion-item>
@@ -17,13 +18,25 @@
       </ion-item>
 
       <ion-item>
-          <ion-label> Password</ion-label>
-          <ion-input #password type="password"></ion-input>
+        <ion-label> Password</ion-label>
+        <ion-input #password type="password"></ion-input>
       </ion-item>
       <button ion-button type="submit" block>Sign In</button>
     </form>
-    
+  </div>
+
+  <ng-template #showsignedinuser>
     <div>
-      <button ion-button (click)="goToSignUpPage()" block>Sign Up</button>
+        <ion-item>
+            <ion-label> Signed In User: {{userID}}</ion-label>
+            
+          </ion-item>
+        <button ion-button (click)="signOut()" block>Sign Out</button>
     </div>
-  </ion-content>
+
+
+  </ng-template>
+  <div>
+    <button ion-button (click)="goToSignUpPage()" block>Sign Up</button>
+  </div>
+</ion-content>
